@@ -1,8 +1,11 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
+const dogRouter = require("./routes/dogRoutes");
 
 const app = express();
+app.use(express.json());
+app.use(dogRouter);
 const port = process.env.PORT || 5001;
 
 async function startApp() {
@@ -19,7 +22,3 @@ async function startApp() {
 }
 
 startApp();
-
-app.get("/", (req, res) => {
-  res.send("Milo API Running");
-});
