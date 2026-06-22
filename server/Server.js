@@ -2,9 +2,11 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
 const dogRouter = require("./routes/dogRoutes");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use(dogRouter);
 const port = process.env.PORT || 5001;
 
@@ -15,7 +17,7 @@ async function startApp() {
       console.log("Server running on port 5001");
     });
 
-    console.log("mongoDB connected");
+    console.log("mongoDB connected!");
   } catch (error) {
     console.log(error);
   }

@@ -31,6 +31,13 @@ const updateDog = (req, res) => {
     .catch((error) => console.log(error));
 };
 
+const getDog = (req, res) => {
+  const id = req.params.id;
+  Dog.findById(id)
+    .then((result) => res.json(result))
+    .catch((error) => console.log(error));
+};
+
 const getDogs = (req, res) => {
   Dog.find()
     .then((result) => res.json(result))
@@ -39,6 +46,7 @@ const getDogs = (req, res) => {
 
 module.exports = {
   getDogs,
+  getDog,
   addDog,
   deleteDog,
   updateDog,
