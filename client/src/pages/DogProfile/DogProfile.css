@@ -1,0 +1,23 @@
+.photo {
+  border: 1px solid red;
+  width: fit-content;
+  padding: 20px;
+}
+
+.dog-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.main-part {
+  margin: 0 0 20px;
+}
+
+.profile-name {
+  font-size: 24px;
+}
+
+.profile-breed {
+  font-size: 18px;
+}

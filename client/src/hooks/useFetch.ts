@@ -13,7 +13,7 @@ function useFetch<T>(apiUrl: string) {
         setIsLoading(false);
       })
       .catch(() => {
-        setError("Klaida gaunant duomenis");
+        setError("Error handling data");
         setIsLoading(false);
       });
   }, [apiUrl]);
