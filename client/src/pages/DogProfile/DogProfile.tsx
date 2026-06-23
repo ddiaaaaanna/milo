@@ -68,7 +68,7 @@ function DogProfile() {
         </div>
       )}
 
-      <VetVisits />
+      <VetVisits dogId={data._id} />
     </>
   );
 }

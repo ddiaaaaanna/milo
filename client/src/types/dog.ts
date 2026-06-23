@@ -6,4 +6,7 @@ export type Dog = {
   photo?: string;
   notes?: string;
   gender?: string;
+  weight?: string;
+  microchip?: string;
+  allergies?: string[];
 };
