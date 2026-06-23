@@ -2,12 +2,14 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
 const dogRouter = require("./routes/dogRoutes");
+const vetRouter = require("./routes/vetVisitRoutes");
 const cors = require("cors");
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(dogRouter);
+app.use(vetRouter);
 const port = process.env.PORT || 5001;
 
 async function startApp() {

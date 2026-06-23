@@ -2,6 +2,7 @@ import "./DogProfile.css";
 import useFetch from "../../hooks/useFetch";
 import { useNavigate, useParams } from "react-router-dom";
 import type { Dog } from "../../types/dog";
+import VetVisits from "../../components/VetVisits/VetVisits";
 
 function DogProfile() {
   const params = useParams();
@@ -66,6 +67,8 @@ function DogProfile() {
           </button>
         </div>
       )}
+
+      <VetVisits />
     </>
   );
 }

@@ -11,12 +11,21 @@ function Home() {
   return (
     <>
       <h1>homepage</h1>
-      {data &&
-        data.map((d) => (
-          <Link to={`/dog/${d._id}`} key={d._id}>
-            <p>{d.name}</p>
+
+      {data.length === 0 && (
+        <>
+          <p>No dogs yet</p>
+          <Link to="/create">
+            <button>Add dog</button>
           </Link>
-        ))}
+        </>
+      )}
+
+      {data.map((d) => (
+        <Link to={`/dog/${d._id}`} key={d._id}>
+          <p>{d.name}</p>
+        </Link>
+      ))}
     </>
   );
 }
