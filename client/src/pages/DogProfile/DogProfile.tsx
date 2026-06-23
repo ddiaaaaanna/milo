@@ -1,10 +1,11 @@
 import "./DogProfile.css";
 import useFetch from "../../hooks/useFetch";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import type { Dog } from "../../types/dog";
 
 function DogProfile() {
   const params = useParams();
+  const navigate = useNavigate();
 
   const api = `http://localhost:5001/dogs/${params.id}`;
   const { data } = useFetch<Dog>(api);
@@ -22,6 +23,12 @@ function DogProfile() {
         today.getDate() < birth.getDate())
     ) {
       age = age - 1;
+    }
+  }
+
+  function deleteDog() {
+    if (window.confirm("Delete this dog?")) {
+      fetch(api, { method: "DELETE" }).then(() => navigate("/"));
     }
   }
 
@@ -53,6 +60,10 @@ function DogProfile() {
             <p>Gender: {data.gender}</p>
             <p>Notes: {data.notes}</p>
           </div>
+
+          <button type="button" onClick={deleteDog}>
+            Delete Dog
+          </button>
         </div>
       )}
     </>
