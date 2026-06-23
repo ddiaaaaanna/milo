@@ -1,13 +1,8 @@
 const Dog = require("../models/dog");
 
 const addDog = (req, res) => {
-  const newDog = new Dog({
-    name: "Marnie",
-    gender: "Male",
-    birthday: new Date("2023-06-08"),
-    breed: "Labrador Retriever",
-    notes: "My best friend",
-  });
+  const newDog = new Dog(req.body);
+
   newDog
     .save()
     .then((result) => res.send(result))

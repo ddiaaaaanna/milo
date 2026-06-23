@@ -9,6 +9,9 @@ const DogSchema = new Schema(
     photo: { type: String },
     notes: { type: String },
     gender: { type: String },
+    weight: { type: String },
+    microchip: { type: String },
+    allergies: { type: [String] },
   },
   { timestamps: true },
 );

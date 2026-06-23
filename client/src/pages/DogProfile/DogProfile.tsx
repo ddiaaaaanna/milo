@@ -1,16 +1,7 @@
 import "./DogProfile.css";
 import useFetch from "../../hooks/useFetch";
 import { useParams } from "react-router-dom";
-
-type Dog = {
-  _id: string;
-  name: string;
-  breed: string;
-  birthday?: string;
-  photo?: string;
-  notes?: string;
-  gender?: string;
-};
+import type { Dog } from "../../types/dog";
 
 function DogProfile() {
   const params = useParams();
