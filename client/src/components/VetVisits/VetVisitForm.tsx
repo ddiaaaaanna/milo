@@ -3,9 +3,10 @@ import { useState, type SyntheticEvent } from "react";
 
 type VetVisitProps = {
   dogId: string;
+  setShowForm: (value: boolean) => void;
 };
 
-function VetVisitForm({ dogId }: VetVisitProps) {
+function VetVisitForm({ dogId, setShowForm }: VetVisitProps) {
   const [reason, setReason] = useState("");
   const [visitType, setVisitType] = useState("");
   const [date, setDate] = useState("");
@@ -13,6 +14,8 @@ function VetVisitForm({ dogId }: VetVisitProps) {
   const [diagnosis, setDiagnosis] = useState("");
   const [treatment, setTreatment] = useState("");
   const [vetName, setVetName] = useState("");
+
+  const [savedVisit, setSavedVisit] = useState(false);
 
   function clearForm() {
     (setReason(""),
@@ -43,88 +46,109 @@ function VetVisitForm({ dogId }: VetVisitProps) {
         vetName,
         dogId,
       }),
-    }).then((response) => {
-      return response.json();
-    });
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then(() => setSavedVisit(true));
 
     clearForm();
   }
 
+  function handleAddAnotherVisit() {
+    clearForm();
+    setSavedVisit(false);
+  }
+
   return (
     <>
-      <h1>Add new visit</h1>
+      {savedVisit && (
+        <>
+          <p>Your visit was saved!</p>
+          <button onClick={handleAddAnotherVisit}>Add new visit</button>
+          <button onClick={() => setShowForm(false)}>See visits</button>
+        </>
+      )}
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="date">Date of visit*</label>
-        <input
-          type="date"
-          placeholder="dd/mm/yyy"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
+      {!savedVisit && (
+        <>
+          <h1>Add new visit</h1>
 
-        <label htmlFor="veterinarian">Veterinarian</label>
-        <input
-          type="text"
-          placeholder="e.g. Dr. Sarah Chen / VetPet"
-          value={vetName}
-          onChange={(e) => setVetName(e.target.value)}
-        />
+          <button onClick={() => setShowForm(false)}>x</button>
 
-        <label htmlFor="visit-type">Visit type</label>
-        <select
-          value={visitType}
-          onChange={(e) => setVisitType(e.target.value)}
-        >
-          <option value="">Select reason</option>
-          <option value="annual">Annual Wellness Exam</option>
-          <option value="sick">Sick Visit</option>
-          <option value="vaccine">Vaccination</option>
-          <option value="dental">Dental Cleaning</option>
-          <option value="surgery">Surgery</option>
-          <option value="follow-up">Follow-up</option>
-          <option value="emergency">Emergency</option>
-          <option value="other">Other</option>
-        </select>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="date">Date of visit*</label>
+            <input
+              type="date"
+              placeholder="dd/mm/yyy"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
 
-        <label htmlFor="reason">Reason for visit*</label>
-        <input
-          type="text"
-          placeholder="e.g. Annual checkup, limping..."
-          value={reason}
-          onChange={(e) => setReason(e.target.value)}
-        />
+            <label htmlFor="veterinarian">Veterinarian</label>
+            <input
+              type="text"
+              placeholder="e.g. Dr. Sarah Chen / VetPet"
+              value={vetName}
+              onChange={(e) => setVetName(e.target.value)}
+            />
 
-        <p>Findings</p>
+            <label htmlFor="visit-type">Visit type</label>
+            <select
+              value={visitType}
+              onChange={(e) => setVisitType(e.target.value)}
+            >
+              <option value="">Select reason</option>
+              <option value="annual">Annual Wellness Exam</option>
+              <option value="sick">Sick Visit</option>
+              <option value="vaccine">Vaccination</option>
+              <option value="dental">Dental Cleaning</option>
+              <option value="surgery">Surgery</option>
+              <option value="follow-up">Follow-up</option>
+              <option value="emergency">Emergency</option>
+              <option value="other">Other</option>
+            </select>
 
-        <label htmlFor="diagnosis">Diagnosis</label>
-        <input
-          type="text"
-          placeholder="e.g. Dermatitis"
-          value={diagnosis}
-          onChange={(e) => setDiagnosis(e.target.value)}
-        />
+            <label htmlFor="reason">Reason for visit*</label>
+            <input
+              type="text"
+              placeholder="e.g. Annual checkup, limping..."
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+            />
 
-        <label htmlFor="treatment">Treatment</label>
-        <input
-          type="text"
-          placeholder="e.g. X-ray, teeth cleaning..."
-          value={treatment}
-          onChange={(e) => setTreatment(e.target.value)}
-        />
+            <p>Findings</p>
 
-        <label htmlFor="notes">Notes</label>
-        <textarea
-          placeholder="Additional observations, vet instructions, home care notes..."
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-        ></textarea>
+            <label htmlFor="diagnosis">Diagnosis</label>
+            <input
+              type="text"
+              placeholder="e.g. Dermatitis"
+              value={diagnosis}
+              onChange={(e) => setDiagnosis(e.target.value)}
+            />
 
-        <button type="button" onClick={clearForm}>
-          Cancel
-        </button>
-        <button type="submit">Save visit →</button>
-      </form>
+            <label htmlFor="treatment">Treatment</label>
+            <input
+              type="text"
+              placeholder="e.g. X-ray, teeth cleaning..."
+              value={treatment}
+              onChange={(e) => setTreatment(e.target.value)}
+            />
+
+            <label htmlFor="notes">Notes</label>
+            <textarea
+              placeholder="Additional observations, vet instructions, home care notes..."
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+            ></textarea>
+
+            <button type="button" onClick={clearForm}>
+              Cancel
+            </button>
+            <button type="submit">Save visit →</button>
+          </form>
+        </>
+      )}
     </>
   );
 }
