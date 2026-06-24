@@ -22,6 +22,7 @@ function useFetch<T>(apiUrl: string) {
     data,
     isLoading,
     error,
+    setData,
   };
 }
 

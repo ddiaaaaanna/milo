@@ -14,7 +14,7 @@ function VetVisitForm({ dogId }: VetVisitProps) {
   const [treatment, setTreatment] = useState("");
   const [vetName, setVetName] = useState("");
 
-  function handleCancel() {
+  function clearForm() {
     (setReason(""),
       setVisitType(""),
       setDate(""),
@@ -46,6 +46,8 @@ function VetVisitForm({ dogId }: VetVisitProps) {
     }).then((response) => {
       return response.json();
     });
+
+    clearForm();
   }
 
   return (
@@ -118,7 +120,7 @@ function VetVisitForm({ dogId }: VetVisitProps) {
           onChange={(e) => setNotes(e.target.value)}
         ></textarea>
 
-        <button type="button" onClick={handleCancel}>
+        <button type="button" onClick={clearForm}>
           Cancel
         </button>
         <button type="submit">Save visit →</button>
