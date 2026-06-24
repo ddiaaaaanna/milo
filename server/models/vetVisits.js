@@ -6,6 +6,7 @@ const VetSchema = new Schema(
     reason: { type: String },
     date: { type: Date },
     notes: { type: String },
+    visitType: { type: String },
     diagnosis: { type: String },
     treatment: { type: String },
     vetName: { type: String },
