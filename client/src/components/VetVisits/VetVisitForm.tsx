@@ -81,24 +81,27 @@ function VetVisitForm({ dogId, setShowForm, handleVisit }: VetVisitProps) {
           <button onClick={() => setShowForm(false)}>x</button>
 
           <form onSubmit={handleSubmit}>
-            <label htmlFor="date">Date of visit*</label>
+            <label htmlFor="vet-date">Date of visit*</label>
             <input
+              id="vet-date"
               type="date"
               placeholder="dd/mm/yyy"
               value={date}
               onChange={(e) => setDate(e.target.value)}
             />
 
-            <label htmlFor="veterinarian">Veterinarian</label>
+            <label htmlFor="vet-veterinarian">Veterinarian</label>
             <input
+              id="vet-veterinarian"
               type="text"
               placeholder="e.g. Dr. Sarah Chen / VetPet"
               value={vetName}
               onChange={(e) => setVetName(e.target.value)}
             />
 
-            <label htmlFor="visit-type">Visit type</label>
+            <label htmlFor="vet-visit-type">Visit type</label>
             <select
+              id="vet-visit-type"
               value={visitType}
               onChange={(e) => setVisitType(e.target.value)}
             >
@@ -113,8 +116,9 @@ function VetVisitForm({ dogId, setShowForm, handleVisit }: VetVisitProps) {
               <option value="other">Other</option>
             </select>
 
-            <label htmlFor="reason">Reason for visit*</label>
+            <label htmlFor="vet-reason">Reason for visit*</label>
             <input
+              id="vet-reason"
               type="text"
               placeholder="e.g. Annual checkup, limping..."
               value={reason}
@@ -123,24 +127,27 @@ function VetVisitForm({ dogId, setShowForm, handleVisit }: VetVisitProps) {
 
             <p>Findings</p>
 
-            <label htmlFor="diagnosis">Diagnosis</label>
+            <label htmlFor="vet-diagnosis">Diagnosis</label>
             <input
+              id="vet-diagnosis"
               type="text"
               placeholder="e.g. Dermatitis"
               value={diagnosis}
               onChange={(e) => setDiagnosis(e.target.value)}
             />
 
-            <label htmlFor="treatment">Treatment</label>
+            <label htmlFor="vet-treatment">Treatment</label>
             <input
+              id="vet-treatment"
               type="text"
               placeholder="e.g. X-ray, teeth cleaning..."
               value={treatment}
               onChange={(e) => setTreatment(e.target.value)}
             />
 
-            <label htmlFor="notes">Notes</label>
+            <label htmlFor="vet-notes">Notes</label>
             <textarea
+              id="vet-notes"
               placeholder="Additional observations, vet instructions, home care notes..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}

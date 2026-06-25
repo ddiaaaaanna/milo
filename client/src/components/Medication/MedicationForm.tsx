@@ -94,8 +94,9 @@ function MedicationForm({
           <button onClick={() => setShowForm(false)}>x</button>
 
           <form onSubmit={handleSubmit}>
-            <label htmlFor="name">*Medication name</label>
+            <label htmlFor="med-name">*Medication name</label>
             <input
+              id="med-name"
               type="text"
               placeholder="e.g. Brevecto"
               value={name}
@@ -104,16 +105,18 @@ function MedicationForm({
 
             <p>Dosage</p>
 
-            <label htmlFor="dose-amount">Dose Amount</label>
+            <label htmlFor="med-dose-amount">Dose Amount</label>
             <input
+              id="med-dose-amount"
               type="text"
               placeholder="e.g. 25"
               value={dose}
               onChange={(e) => setDose(e.target.value)}
             />
 
-            <label htmlFor="frequency">Frequency</label>
+            <label htmlFor="med-frequency">Frequency</label>
             <select
+              id="med-frequency"
               value={frequency}
               onChange={(e) => setFrequency(e.target.value)}
             >
@@ -139,16 +142,18 @@ function MedicationForm({
 
             <p>Schedule</p>
 
-            <label htmlFor="start">Start date</label>
+            <label htmlFor="med-start">Start date</label>
             <input
+              id="med-start"
               type="date"
               placeholder="dd/mm/yyyy"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
 
-            <label htmlFor="end">End date</label>
+            <label htmlFor="med-end">End date</label>
             <input
+              id="med-end"
               type="date"
               placeholder="dd/mm/yyyy"
               value={endDate}
@@ -156,8 +161,9 @@ function MedicationForm({
               onChange={(e) => setEndDate(e.target.value)}
             />
 
-            <label htmlFor="ongoing">Ongoing - no end date</label>
+            <label htmlFor="med-ongoing">Ongoing - no end date</label>
             <input
+              id="med-ongoing"
               type="checkbox"
               checked={isOngoing}
               onChange={(e) => setIsOngoing(e.target.checked)}
@@ -165,16 +171,18 @@ function MedicationForm({
 
             <p>Details</p>
 
-            <label htmlFor="reason">Reason / condition treated</label>
+            <label htmlFor="med-reason">Reason / condition treated</label>
             <input
+              id="med-reason"
               type="text"
               placeholder="e.g. Allergy"
               value={reason}
               onChange={(e) => setReason(e.target.value)}
             />
 
-            <label htmlFor="instructions">Instructions & notes</label>
+            <label htmlFor="med-instructions">Instructions & notes</label>
             <input
+              id="med-instructions"
               type="text"
               placeholder="e.g. Give with food, store in fridge, monitor for side effects..."
               value={notes}
