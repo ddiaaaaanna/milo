@@ -19,9 +19,8 @@ const deleteDog = (req, res) => {
 
 const updateDog = (req, res) => {
   const id = req.params.id;
-  const body = { name: "edited" };
 
-  Dog.findByIdAndUpdate(id, body)
+  Dog.findByIdAndUpdate(id, req.body, { new: true })
     .then((result) => res.send(result))
     .catch((error) => console.log(error));
 };

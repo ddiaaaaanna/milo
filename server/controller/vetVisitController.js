@@ -19,9 +19,8 @@ const deleteVisit = (req, res) => {
 
 const updateVisit = (req, res) => {
   const id = req.params.id;
-  const body = { name: "edited" };
 
-  VetVisits.findByIdAndUpdate(id, body)
+  VetVisits.findByIdAndUpdate(id, req.body, { new: true })
     .then((result) => res.send(result))
     .catch((error) => console.log(error));
 };

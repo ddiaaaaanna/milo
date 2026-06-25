@@ -19,9 +19,8 @@ const deleteMedication = (req, res) => {
 
 const updateMedication = (req, res) => {
   const id = req.params.id;
-  const body = { name: "edited" };
 
-  Medication.findByIdAndUpdate(id, body)
+  Medication.findByIdAndUpdate(id, req.body, { new: true })
     .then((result) => res.send(result))
     .catch((error) => console.log(error));
 };
