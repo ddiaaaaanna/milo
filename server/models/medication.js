@@ -8,7 +8,6 @@ const MedicationSchema = new Schema(
     notes: { type: String },
     reason: { type: String },
     frequency: { type: String },
-    vetVisitId: { type: mongoose.Schema.Types.ObjectId, ref: "VetVisit" },
     startDate: { type: Date },
     endDate: { type: Date },
     dogId: { type: mongoose.Schema.Types.ObjectId, ref: "Dog" },

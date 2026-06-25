@@ -3,6 +3,7 @@ import useFetch from "../../hooks/useFetch";
 import { useNavigate, useParams } from "react-router-dom";
 import type { Dog } from "../../types/dog";
 import VetVisits from "../../components/VetVisits/VetVisits";
+import MedicationList from "../../components/Medication/Medication";
 
 function DogProfile() {
   const params = useParams();
@@ -69,6 +70,7 @@ function DogProfile() {
       )}
 
       <VetVisits dogId={data._id} />
+      <MedicationList dogId={data._id} />
     </>
   );
 }

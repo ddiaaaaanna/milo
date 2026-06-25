@@ -39,8 +39,6 @@ function VetVisits({ dogId }: VetVisitProps) {
         + Add vet visit
       </button>
 
-      <button type="button">💊 Add medication</button>
-
       {data &&
         data.map((v) => (
           <div key={v._id}>
