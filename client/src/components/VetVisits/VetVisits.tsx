@@ -26,6 +26,11 @@ function VetVisits({ dogId }: VetVisitProps) {
     );
   }
 
+  function handleVisit(newVisit: VetVisit) {
+    if (!data) return;
+    setData([...data, newVisit]);
+  }
+
   return (
     <>
       <p>vet visits</p>
@@ -50,7 +55,13 @@ function VetVisits({ dogId }: VetVisitProps) {
           </div>
         ))}
 
-      {showForm && <VetVisitForm dogId={dogId} setShowForm={setShowForm} />}
+      {showForm && (
+        <VetVisitForm
+          dogId={dogId}
+          setShowForm={setShowForm}
+          handleVisit={handleVisit}
+        />
+      )}
     </>
   );
 }

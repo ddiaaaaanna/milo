@@ -1,12 +1,14 @@
 import "./VetVisitForm.css";
 import { useState, type SyntheticEvent } from "react";
+import { type VetVisit } from "../../types/vetVisit";
 
 type VetVisitProps = {
   dogId: string;
   setShowForm: (value: boolean) => void;
+  handleVisit: (newVisit: VetVisit) => void;
 };
 
-function VetVisitForm({ dogId, setShowForm }: VetVisitProps) {
+function VetVisitForm({ dogId, setShowForm, handleVisit }: VetVisitProps) {
   const [reason, setReason] = useState("");
   const [visitType, setVisitType] = useState("");
   const [date, setDate] = useState("");
@@ -50,7 +52,9 @@ function VetVisitForm({ dogId, setShowForm }: VetVisitProps) {
       .then((response) => {
         return response.json();
       })
-      .then(() => setSavedVisit(true));
+      .then((result) => {
+        (setSavedVisit(true), handleVisit(result));
+      });
 
     clearForm();
   }
