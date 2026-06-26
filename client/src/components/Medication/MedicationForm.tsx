@@ -8,41 +8,57 @@ type MedicationProps = {
   handleMedication: (newMedication: Medication) => void;
 };
 
+type MedicationObject = {
+  name: string;
+  dose: string;
+  notes: string;
+  reason: string;
+  frequency: string;
+  startDate: string;
+  endDate: string;
+};
+
 function MedicationForm({
   dogId,
   setShowForm,
   handleMedication,
 }: MedicationProps) {
-  const [name, setName] = useState("");
-  const [dose, setDose] = useState("");
-  const [notes, setNotes] = useState("");
-  const [reason, setReason] = useState("");
-  const [frequency, setFrequency] = useState("");
+  const [medication, setMedication] = useState<MedicationObject>({
+    name: "",
+    dose: "",
+    notes: "",
+    reason: "",
+    frequency: "",
+    startDate: "",
+    endDate: "",
+  });
+
   const [customFrequency, setCustomFrequency] = useState("");
-  const [vetVisitId, setVetVisitId] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
   const [isOngoing, setIsOngoing] = useState(false);
 
   const [savedMedication, setSavedMedication] = useState(false);
 
   function clearForm() {
-    (setReason(""),
-      setName(""),
-      setDose(""),
-      setNotes(""),
-      setFrequency(""),
-      setCustomFrequency(""),
-      setIsOngoing(false),
-      setVetVisitId(""),
-      setStartDate(""),
-      setEndDate(""));
+    setMedication({
+      name: "",
+      dose: "",
+      notes: "",
+      reason: "",
+      frequency: "",
+      startDate: "",
+      endDate: "",
+    });
+    setCustomFrequency("");
+    setIsOngoing(false);
   }
 
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
-    const finalFrequency = frequency === "custom" ? customFrequency : frequency;
-    const finalEndDate = isOngoing ? "" : endDate;
+    const finalFrequency =
+      medication.frequency === "custom"
+        ? customFrequency
+        : medication.frequency;
+    const finalEndDate = isOngoing ? "" : medication.endDate;
 
     const api = `http://localhost:5001/medication`;
     fetch(api, {
@@ -51,13 +67,8 @@ function MedicationForm({
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        reason,
-        name,
-        dose,
-        notes,
+        ...medication,
         frequency: finalFrequency,
-        vetVisitId,
-        startDate,
         endDate: finalEndDate,
         dogId,
       }),
@@ -99,8 +110,10 @@ function MedicationForm({
               id="med-name"
               type="text"
               placeholder="e.g. Brevecto"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={medication.name}
+              onChange={(e) =>
+                setMedication({ ...medication, name: e.target.value })
+              }
             />
 
             <p>Dosage</p>
@@ -110,15 +123,19 @@ function MedicationForm({
               id="med-dose-amount"
               type="text"
               placeholder="e.g. 25"
-              value={dose}
-              onChange={(e) => setDose(e.target.value)}
+              value={medication.dose}
+              onChange={(e) =>
+                setMedication({ ...medication, dose: e.target.value })
+              }
             />
 
             <label htmlFor="med-frequency">Frequency</label>
             <select
               id="med-frequency"
-              value={frequency}
-              onChange={(e) => setFrequency(e.target.value)}
+              value={medication.frequency}
+              onChange={(e) =>
+                setMedication({ ...medication, frequency: e.target.value })
+              }
             >
               <option value="">Select frequency</option>
               <option value="once">Once daily</option>
@@ -131,7 +148,7 @@ function MedicationForm({
               <option value="custom">Custom</option>
             </select>
 
-            {frequency === "custom" && (
+            {medication.frequency === "custom" && (
               <input
                 type="text"
                 placeholder="e.g. every Saturday and Sunday"
@@ -147,8 +164,10 @@ function MedicationForm({
               id="med-start"
               type="date"
               placeholder="dd/mm/yyyy"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
+              value={medication.startDate}
+              onChange={(e) =>
+                setMedication({ ...medication, startDate: e.target.value })
+              }
             />
 
             <label htmlFor="med-end">End date</label>
@@ -156,9 +175,11 @@ function MedicationForm({
               id="med-end"
               type="date"
               placeholder="dd/mm/yyyy"
-              value={endDate}
+              value={medication.endDate}
               disabled={isOngoing}
-              onChange={(e) => setEndDate(e.target.value)}
+              onChange={(e) =>
+                setMedication({ ...medication, endDate: e.target.value })
+              }
             />
 
             <label htmlFor="med-ongoing">Ongoing - no end date</label>
@@ -176,8 +197,10 @@ function MedicationForm({
               id="med-reason"
               type="text"
               placeholder="e.g. Allergy"
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}
+              value={medication.reason}
+              onChange={(e) =>
+                setMedication({ ...medication, reason: e.target.value })
+              }
             />
 
             <label htmlFor="med-instructions">Instructions & notes</label>
@@ -185,8 +208,10 @@ function MedicationForm({
               id="med-instructions"
               type="text"
               placeholder="e.g. Give with food, store in fridge, monitor for side effects..."
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
+              value={medication.notes}
+              onChange={(e) =>
+                setMedication({ ...medication, notes: e.target.value })
+              }
             />
 
             <button type="button" onClick={clearForm}>

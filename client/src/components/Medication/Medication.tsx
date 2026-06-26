@@ -18,15 +18,30 @@ function MedicationList({ dogId }: MedicationProps) {
   function deleteMedication(medicationId: string) {
     if (!data) return;
     const currentMedication = data;
-    fetch(`http://localhost:5001/medication/${medicationId}`, {
-      method: "DELETE",
-    }).then(() => {
-      const updated = currentMedication.filter(
-        (medication) => medication._id !== medicationId,
-      );
-      setData(updated);
-    });
+
+    if (window.confirm("Delete this medication?")) {
+      fetch(`http://localhost:5001/medication/${medicationId}`, {
+        method: "DELETE",
+      }).then(() => {
+        const updated = currentMedication.filter(
+          (medication) => medication._id !== medicationId,
+        );
+        setData(updated);
+      });
+    }
   }
+
+  //   function updateMedication(id) {
+  //   fetch(`${api}/${id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       completed: true,
+  //     }),
+  //   });
+  // }
 
   function handleMedication(newMedication: Medication) {
     if (!data) return;

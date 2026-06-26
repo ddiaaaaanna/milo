@@ -18,12 +18,15 @@ function VetVisits({ dogId }: VetVisitProps) {
   function deleteVisit(visitId: string) {
     if (!data) return;
     const currentVisits = data;
-    fetch(`http://localhost:5001/visits/${visitId}`, { method: "DELETE" }).then(
-      () => {
+
+    if (window.confirm("Delete this visit?")) {
+      fetch(`http://localhost:5001/visits/${visitId}`, {
+        method: "DELETE",
+      }).then(() => {
         const updated = currentVisits.filter((visit) => visit._id !== visitId);
         setData(updated);
-      },
-    );
+      });
+    }
   }
 
   function handleVisit(newVisit: VetVisit) {
