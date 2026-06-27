@@ -10,6 +10,7 @@ type MedicationProps = {
 
 function MedicationList({ dogId }: MedicationProps) {
   const [showForm, setShowForm] = useState<boolean>(false);
+  const [editMedication, setEditMedication] = useState<Medication | null>(null);
 
   const api = `http://localhost:5001/dogs/${dogId}/medication`;
   const { data, setData } = useFetch<Medication[]>(api);
@@ -31,17 +32,13 @@ function MedicationList({ dogId }: MedicationProps) {
     }
   }
 
-  //   function updateMedication(id) {
-  //   fetch(`${api}/${id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       completed: true,
-  //     }),
-  //   });
-  // }
+  function handleEditMedication(updatedMed: Medication) {
+    if (!data) return;
+    const updatedMedication = data.map((m) =>
+      m._id === updatedMed._id ? updatedMed : m,
+    );
+    setData(updatedMedication);
+  }
 
   function handleMedication(newMedication: Medication) {
     if (!data) return;
@@ -67,7 +64,14 @@ function MedicationList({ dogId }: MedicationProps) {
             <p>Dose: {m.dose}</p>
 
             <div>
-              <button>view</button>
+              <button
+                onClick={() => {
+                  setEditMedication(m);
+                  setShowForm(true);
+                }}
+              >
+                edit
+              </button>
               <button onClick={() => deleteMedication(m._id)}>delete</button>
             </div>
           </div>
@@ -78,6 +82,9 @@ function MedicationList({ dogId }: MedicationProps) {
           dogId={dogId}
           setShowForm={setShowForm}
           handleMedication={handleMedication}
+          editMedication={editMedication}
+          setEditMedication={setEditMedication}
+          handleEditMedication={handleEditMedication}
         />
       )}
     </>

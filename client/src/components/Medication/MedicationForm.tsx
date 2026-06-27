@@ -6,6 +6,9 @@ type MedicationProps = {
   dogId: string;
   setShowForm: (value: boolean) => void;
   handleMedication: (newMedication: Medication) => void;
+  editMedication: Medication | null;
+  setEditMedication: (value: Medication | null) => void;
+  handleEditMedication: (updatedMed: Medication) => void;
 };
 
 type MedicationObject = {
@@ -22,16 +25,31 @@ function MedicationForm({
   dogId,
   setShowForm,
   handleMedication,
+  editMedication,
+  setEditMedication,
+  handleEditMedication,
 }: MedicationProps) {
-  const [medication, setMedication] = useState<MedicationObject>({
-    name: "",
-    dose: "",
-    notes: "",
-    reason: "",
-    frequency: "",
-    startDate: "",
-    endDate: "",
-  });
+  const initialMedication = editMedication
+    ? {
+        name: editMedication.name,
+        dose: editMedication.dose,
+        notes: editMedication.notes || "",
+        reason: editMedication.reason || "",
+        frequency: editMedication.frequency || "",
+        startDate: editMedication.startDate || "",
+        endDate: editMedication.endDate || "",
+      }
+    : {
+        name: "",
+        dose: "",
+        notes: "",
+        reason: "",
+        frequency: "",
+        startDate: "",
+        endDate: "",
+      };
+  const [medication, setMedication] =
+    useState<MedicationObject>(initialMedication);
 
   const [customFrequency, setCustomFrequency] = useState("");
   const [isOngoing, setIsOngoing] = useState(false);
@@ -81,6 +99,38 @@ function MedicationForm({
       });
 
     clearForm();
+    setEditMedication(null);
+  }
+
+  function updateMedication(e: SyntheticEvent) {
+    e.preventDefault();
+    const finalFrequency =
+      medication.frequency === "custom"
+        ? customFrequency
+        : medication.frequency;
+    const finalEndDate = isOngoing ? "" : medication.endDate;
+
+    const api = `http://localhost:5001/medication/${editMedication?._id}`;
+    fetch(api, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        ...medication,
+        frequency: finalFrequency,
+        endDate: finalEndDate,
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        (setSavedMedication(true), handleEditMedication(result));
+      });
+
+    clearForm();
+    setEditMedication(null);
   }
 
   function handleMoreMedication() {
@@ -88,6 +138,12 @@ function MedicationForm({
     setSavedMedication(false);
   }
 
+  function resetForms() {
+    clearForm();
+    setShowForm(false);
+    setEditMedication(null);
+    setSavedMedication(false);
+  }
   return (
     <>
       {savedMedication && (
@@ -100,11 +156,15 @@ function MedicationForm({
 
       {!savedMedication && (
         <>
-          <h1>Add new medication</h1>
+          {editMedication ? (
+            <h1>Edit medication</h1>
+          ) : (
+            <h1>Add new medication</h1>
+          )}
 
-          <button onClick={() => setShowForm(false)}>x</button>
+          <button onClick={resetForms}>x</button>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={editMedication ? updateMedication : handleSubmit}>
             <label htmlFor="med-name">*Medication name</label>
             <input
               id="med-name"
@@ -214,7 +274,7 @@ function MedicationForm({
               }
             />
 
-            <button type="button" onClick={clearForm}>
+            <button type="button" onClick={resetForms}>
               Cancel
             </button>
             <button type="submit">Save medication →</button>
