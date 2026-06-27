@@ -49,7 +49,13 @@ function MedicationList({ dogId }: MedicationProps) {
     <>
       <p>medication</p>
 
-      <button type="button" onClick={() => setShowForm(true)}>
+      <button
+        type="button"
+        onClick={() => {
+          setShowForm(true);
+          setEditMedication(null);
+        }}
+      >
         💊 Add medication
       </button>
 

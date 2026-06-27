@@ -35,11 +35,25 @@ function VetVisits({ dogId }: VetVisitProps) {
     setData([...data, newVisit]);
   }
 
+  function handleEditVisit(updatedVisit: VetVisit) {
+    if (!data) return;
+    const updatedVetVisit = data.map((v) =>
+      v._id === updatedVisit._id ? updatedVisit : v,
+    );
+    setData(updatedVetVisit);
+  }
+
   return (
     <>
       <p>vet visits</p>
 
-      <button type="button" onClick={() => setShowForm(true)}>
+      <button
+        type="button"
+        onClick={() => {
+          setShowForm(true);
+          setEditVisit(null);
+        }}
+      >
         + Add vet visit
       </button>
 
@@ -53,7 +67,14 @@ function VetVisits({ dogId }: VetVisitProps) {
             {v.treatment && <p>{v.treatment}</p>}
 
             <div>
-              <button onClick={() => setEditVisit(v)}>edit</button>
+              <button
+                onClick={() => {
+                  setEditVisit(v);
+                  setShowForm(true);
+                }}
+              >
+                edit
+              </button>
               <button onClick={() => deleteVisit(v._id)}>delete</button>
             </div>
           </div>
@@ -65,6 +86,8 @@ function VetVisits({ dogId }: VetVisitProps) {
           setShowForm={setShowForm}
           handleVisit={handleVisit}
           editVisit={editVisit}
+          setEditVisit={setEditVisit}
+          handleEditVisit={handleEditVisit}
         />
       )}
     </>

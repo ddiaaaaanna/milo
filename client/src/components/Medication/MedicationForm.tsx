@@ -150,7 +150,7 @@ function MedicationForm({
         <>
           <p>Your medication was logged</p>
           <button onClick={handleMoreMedication}>Add more medication</button>
-          <button onClick={() => setShowForm(false)}>See medication</button>
+          <button onClick={resetForms}>See medication</button>
         </>
       )}
 

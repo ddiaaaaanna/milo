@@ -7,6 +7,8 @@ type VetVisitProps = {
   setShowForm: (value: boolean) => void;
   handleVisit: (newVisit: VetVisit) => void;
   editVisit: VetVisit | null;
+  setEditVisit: (value: VetVisit | null) => void;
+  handleEditVisit: (updatedVisit: VetVisit) => void;
 };
 
 type VetVisitObject = {
@@ -24,6 +26,8 @@ function VetVisitForm({
   setShowForm,
   handleVisit,
   editVisit,
+  setEditVisit,
+  handleEditVisit,
 }: VetVisitProps) {
   const initialVisit = editVisit
     ? {
@@ -84,8 +88,39 @@ function VetVisitForm({
     clearForm();
   }
 
+  function updateVisit(e: SyntheticEvent) {
+    e.preventDefault();
+
+    const api = `http://localhost:5001/visits/${editVisit?._id}`;
+    fetch(api, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        ...visit,
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        (setSavedVisit(true), handleEditVisit(result));
+      });
+
+    clearForm();
+    setEditVisit(null);
+  }
+
   function handleAddAnotherVisit() {
     clearForm();
+    setSavedVisit(false);
+  }
+
+  function resetForms() {
+    clearForm();
+    setShowForm(false);
+    setEditVisit(null);
     setSavedVisit(false);
   }
 
@@ -95,17 +130,17 @@ function VetVisitForm({
         <>
           <p>Your visit was saved!</p>
           <button onClick={handleAddAnotherVisit}>Add new visit</button>
-          <button onClick={() => setShowForm(false)}>See visits</button>
+          <button onClick={resetForms}>See visits</button>
         </>
       )}
 
       {!savedVisit && (
         <>
-          <h1>Add new visit</h1>
+          {editVisit ? <h1>Edit visit</h1> : <h1>Add new visit</h1>}
 
-          <button onClick={() => setShowForm(false)}>x</button>
+          <button onClick={resetForms}>x</button>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={editVisit ? updateVisit : handleSubmit}>
             <label htmlFor="vet-date">Date of visit*</label>
             <input
               id="vet-date"
@@ -184,7 +219,7 @@ function VetVisitForm({
               onChange={(e) => setVisit({ ...visit, notes: e.target.value })}
             ></textarea>
 
-            <button type="button" onClick={clearForm}>
+            <button type="button" onClick={resetForms}>
               Cancel
             </button>
             <button type="submit">Save visit →</button>
