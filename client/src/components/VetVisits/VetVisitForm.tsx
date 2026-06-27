@@ -6,27 +6,58 @@ type VetVisitProps = {
   dogId: string;
   setShowForm: (value: boolean) => void;
   handleVisit: (newVisit: VetVisit) => void;
+  editVisit: VetVisit | null;
 };
 
-function VetVisitForm({ dogId, setShowForm, handleVisit }: VetVisitProps) {
-  const [reason, setReason] = useState("");
-  const [visitType, setVisitType] = useState("");
-  const [date, setDate] = useState("");
-  const [notes, setNotes] = useState("");
-  const [diagnosis, setDiagnosis] = useState("");
-  const [treatment, setTreatment] = useState("");
-  const [vetName, setVetName] = useState("");
+type VetVisitObject = {
+  reason: string;
+  visitType: string;
+  date: string;
+  notes: string;
+  diagnosis: string;
+  treatment: string;
+  vetName: string;
+};
 
+function VetVisitForm({
+  dogId,
+  setShowForm,
+  handleVisit,
+  editVisit,
+}: VetVisitProps) {
+  const initialVisit = editVisit
+    ? {
+        reason: editVisit.reason,
+        visitType: editVisit.visitType,
+        date: editVisit.date,
+        notes: editVisit.notes || "",
+        diagnosis: editVisit.diagnosis || "",
+        treatment: editVisit.treatment || "",
+        vetName: editVisit.vetName || "",
+      }
+    : {
+        reason: "",
+        visitType: "",
+        date: "",
+        notes: "",
+        diagnosis: "",
+        treatment: "",
+        vetName: "",
+      };
+
+  const [visit, setVisit] = useState<VetVisitObject>(initialVisit);
   const [savedVisit, setSavedVisit] = useState(false);
 
   function clearForm() {
-    (setReason(""),
-      setVisitType(""),
-      setDate(""),
-      setNotes(""),
-      setDiagnosis(""),
-      setTreatment(""),
-      setVetName(""));
+    setVisit({
+      reason: "",
+      visitType: "",
+      date: "",
+      notes: "",
+      diagnosis: "",
+      treatment: "",
+      vetName: "",
+    });
   }
 
   function handleSubmit(e: SyntheticEvent) {
@@ -39,13 +70,7 @@ function VetVisitForm({ dogId, setShowForm, handleVisit }: VetVisitProps) {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        reason,
-        visitType,
-        date,
-        notes,
-        diagnosis,
-        treatment,
-        vetName,
+        ...visit,
         dogId,
       }),
     })
@@ -86,8 +111,8 @@ function VetVisitForm({ dogId, setShowForm, handleVisit }: VetVisitProps) {
               id="vet-date"
               type="date"
               placeholder="dd/mm/yyy"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
+              value={visit.date}
+              onChange={(e) => setVisit({ ...visit, date: e.target.value })}
             />
 
             <label htmlFor="vet-veterinarian">Veterinarian</label>
@@ -95,15 +120,17 @@ function VetVisitForm({ dogId, setShowForm, handleVisit }: VetVisitProps) {
               id="vet-veterinarian"
               type="text"
               placeholder="e.g. Dr. Sarah Chen / VetPet"
-              value={vetName}
-              onChange={(e) => setVetName(e.target.value)}
+              value={visit.vetName}
+              onChange={(e) => setVisit({ ...visit, vetName: e.target.value })}
             />
 
             <label htmlFor="vet-visit-type">Visit type</label>
             <select
               id="vet-visit-type"
-              value={visitType}
-              onChange={(e) => setVisitType(e.target.value)}
+              value={visit.visitType}
+              onChange={(e) =>
+                setVisit({ ...visit, visitType: e.target.value })
+              }
             >
               <option value="">Select reason</option>
               <option value="annual">Annual Wellness Exam</option>
@@ -121,8 +148,8 @@ function VetVisitForm({ dogId, setShowForm, handleVisit }: VetVisitProps) {
               id="vet-reason"
               type="text"
               placeholder="e.g. Annual checkup, limping..."
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}
+              value={visit.reason}
+              onChange={(e) => setVisit({ ...visit, reason: e.target.value })}
             />
 
             <p>Findings</p>
@@ -132,8 +159,10 @@ function VetVisitForm({ dogId, setShowForm, handleVisit }: VetVisitProps) {
               id="vet-diagnosis"
               type="text"
               placeholder="e.g. Dermatitis"
-              value={diagnosis}
-              onChange={(e) => setDiagnosis(e.target.value)}
+              value={visit.diagnosis}
+              onChange={(e) =>
+                setVisit({ ...visit, diagnosis: e.target.value })
+              }
             />
 
             <label htmlFor="vet-treatment">Treatment</label>
@@ -141,16 +170,18 @@ function VetVisitForm({ dogId, setShowForm, handleVisit }: VetVisitProps) {
               id="vet-treatment"
               type="text"
               placeholder="e.g. X-ray, teeth cleaning..."
-              value={treatment}
-              onChange={(e) => setTreatment(e.target.value)}
+              value={visit.treatment}
+              onChange={(e) =>
+                setVisit({ ...visit, treatment: e.target.value })
+              }
             />
 
             <label htmlFor="vet-notes">Notes</label>
             <textarea
               id="vet-notes"
               placeholder="Additional observations, vet instructions, home care notes..."
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
+              value={visit.notes}
+              onChange={(e) => setVisit({ ...visit, notes: e.target.value })}
             ></textarea>
 
             <button type="button" onClick={clearForm}>

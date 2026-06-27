@@ -10,6 +10,7 @@ type VetVisitProps = {
 
 function VetVisits({ dogId }: VetVisitProps) {
   const [showForm, setShowForm] = useState<boolean>(false);
+  const [editVisit, setEditVisit] = useState<VetVisit | null>(null);
 
   const api = `http://localhost:5001/dogs/${dogId}/visits`;
   const { data, setData } = useFetch<VetVisit[]>(api);
@@ -52,7 +53,7 @@ function VetVisits({ dogId }: VetVisitProps) {
             {v.treatment && <p>{v.treatment}</p>}
 
             <div>
-              <button>view</button>
+              <button onClick={() => setEditVisit(v)}>edit</button>
               <button onClick={() => deleteVisit(v._id)}>delete</button>
             </div>
           </div>
@@ -63,6 +64,7 @@ function VetVisits({ dogId }: VetVisitProps) {
           dogId={dogId}
           setShowForm={setShowForm}
           handleVisit={handleVisit}
+          editVisit={editVisit}
         />
       )}
     </>
