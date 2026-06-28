@@ -33,7 +33,7 @@ function VetVisitForm({
     ? {
         reason: editVisit.reason,
         visitType: editVisit.visitType,
-        date: editVisit.date,
+        date: editVisit.date ? editVisit.date.split("T")[0] : "",
         notes: editVisit.notes || "",
         diagnosis: editVisit.diagnosis || "",
         treatment: editVisit.treatment || "",

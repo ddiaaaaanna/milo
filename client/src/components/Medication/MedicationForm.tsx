@@ -36,8 +36,12 @@ function MedicationForm({
         notes: editMedication.notes || "",
         reason: editMedication.reason || "",
         frequency: editMedication.frequency || "",
-        startDate: editMedication.startDate || "",
-        endDate: editMedication.endDate || "",
+        startDate: editMedication.startDate
+          ? editMedication.startDate.split("T")[0]
+          : "",
+        endDate: editMedication.endDate
+          ? editMedication.endDate.split("T")[0]
+          : "",
       }
     : {
         name: "",
@@ -144,6 +148,7 @@ function MedicationForm({
     setEditMedication(null);
     setSavedMedication(false);
   }
+
   return (
     <>
       {savedMedication && (
