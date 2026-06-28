@@ -5,6 +5,7 @@ const dogRouter = require("./routes/dogRoutes");
 const vetRouter = require("./routes/vetVisitRoutes");
 const medicationRouter = require("./routes/medicationRoutes");
 const journalRouter = require("./routes/journalRoutes");
+const trainingRouter = require("./routes/trainingRoutes");
 const cors = require("cors");
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(dogRouter);
 app.use(vetRouter);
 app.use(medicationRouter);
 app.use(journalRouter);
+app.use(trainingRouter);
 const port = process.env.PORT || 5001;
 
 async function startApp() {
