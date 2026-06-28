@@ -4,13 +4,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import type { Dog } from "../../types/dog";
 import VetVisits from "../../components/VetVisits/VetVisits";
 import MedicationList from "../../components/Medication/Medication";
+import { useState } from "react";
+import EditDog from "../../components/EditDog/EditDog";
 
 function DogProfile() {
   const params = useParams();
   const navigate = useNavigate();
+  const [showForm, setShowForm] = useState(false);
 
   const api = `http://localhost:5001/dogs/${params.id}`;
-  const { data } = useFetch<Dog>(api);
+  const { data, setData } = useFetch<Dog>(api);
   if (!data) return <p>Loading…</p>;
 
   let age: number | null = null;
@@ -60,13 +63,22 @@ function DogProfile() {
             </p>
 
             <p>Gender: {data.gender}</p>
+            <p>Weight: {data.weight} kg</p>
             <p>Notes: {data.notes}</p>
+            <p>Allergies: {data.allergies}</p>
           </div>
 
+          <button type="button" onClick={() => setShowForm(true)}>
+            Edit Dog
+          </button>
           <button type="button" onClick={deleteDog}>
             Delete Dog
           </button>
         </div>
+      )}
+
+      {showForm && (
+        <EditDog dog={data} setShowForm={setShowForm} updateDogData={setData} />
       )}
 
       <VetVisits dogId={data._id} />

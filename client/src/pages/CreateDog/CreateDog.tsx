@@ -109,7 +109,7 @@ JPG, PNG or WEBP"
         <label htmlFor="">Weight</label>
         <input
           type="number"
-          placeholder="0.0"
+          placeholder="0.0 kg"
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
         />
