@@ -3,6 +3,7 @@ import useFetch from "../../hooks/useFetch";
 import { type TrainingType } from "../../types/training";
 import { useState } from "react";
 import ExerciseForm from "./ExerciseForm";
+import ExerciseEditor from "./ExerciseEditor";
 
 type TrainingProps = {
   dogId: string;
@@ -10,6 +11,7 @@ type TrainingProps = {
 
 function Training({ dogId }: TrainingProps) {
   const [showForm, setShowForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
   const [editExercise, setEditExercise] = useState<TrainingType | null>(null);
 
   const api = `http://localhost:5001/dogs/${dogId}/training`;
@@ -55,7 +57,7 @@ function Training({ dogId }: TrainingProps) {
             <button
               type="button"
               onClick={() => {
-                setShowForm(true);
+                setShowEditForm(true);
                 setEditExercise(ex);
               }}
             >
@@ -72,6 +74,15 @@ function Training({ dogId }: TrainingProps) {
           dogId={dogId}
           setShowForm={setShowForm}
           handleExercise={handleExercise}
+        />
+      )}
+
+      {showEditForm && (
+        <ExerciseEditor
+          setShowEditForm={setShowEditForm}
+          editExercise={editExercise}
+          setEditExercise={setEditExercise}
+          handleEditExercise={handleEditExercise}
         />
       )}
 
