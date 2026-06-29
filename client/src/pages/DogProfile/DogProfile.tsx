@@ -7,6 +7,7 @@ import MedicationList from "../../components/Medication/Medication";
 import { useState } from "react";
 import EditDog from "../../components/EditDog/EditDog";
 import Journal from "../../components/Journal/Journal";
+import Training from "../../components/Training/Training";
 
 function DogProfile() {
   const params = useParams();
@@ -85,6 +86,7 @@ function DogProfile() {
       <VetVisits dogId={data._id} />
       <MedicationList dogId={data._id} />
       <Journal dogId={data._id} name={data.name} />
+      <Training dogId={data._id} />
     </>
   );
 }

@@ -1,0 +1,91 @@
+import "./Training.css";
+import useFetch from "../../hooks/useFetch";
+import { type TrainingType } from "../../types/training";
+import { useState } from "react";
+import ExerciseForm from "./ExerciseForm";
+
+type TrainingProps = {
+  dogId: string;
+};
+
+function Training({ dogId }: TrainingProps) {
+  const [showForm, setShowForm] = useState(false);
+  const [editExercise, setEditExercise] = useState<TrainingType | null>(null);
+
+  const api = `http://localhost:5001/dogs/${dogId}/training`;
+  const { data, setData } = useFetch<TrainingType[]>(api);
+  if (!data) return <p>Loading…</p>;
+
+  function deleteExercise(exerciseId: string) {
+    if (!data) return;
+    const currentExercise = data;
+
+    if (window.confirm("Delete this exercise?")) {
+      fetch(`http://localhost:5001/training/${exerciseId}`, {
+        method: "DELETE",
+      }).then(() => {
+        const updated = currentExercise.filter((ex) => ex._id !== exerciseId);
+        setData(updated);
+      });
+    }
+  }
+
+  function handleEditExercise(updatedEx: TrainingType) {
+    if (!data) return;
+    const updatedExercise = data.map((ex) =>
+      ex._id === updatedEx._id ? updatedEx : ex,
+    );
+    setData(updatedExercise);
+  }
+
+  function handleExercise(newExercise: TrainingType) {
+    if (!data) return;
+    setData([...data, newExercise]);
+  }
+
+  return (
+    <>
+      <p>training</p>
+
+      {data &&
+        data.map((ex) => (
+          <div key={ex._id}>
+            <p>{ex.exerciseName}</p>
+            <p>{ex.difficulty}</p>
+            <button
+              type="button"
+              onClick={() => {
+                setShowForm(true);
+                setEditExercise(ex);
+              }}
+            >
+              edit
+            </button>
+            <button type="button" onClick={() => deleteExercise(ex._id)}>
+              delete
+            </button>
+          </div>
+        ))}
+
+      {showForm && (
+        <ExerciseForm
+          dogId={dogId}
+          setShowForm={setShowForm}
+          handleExercise={handleExercise}
+        />
+      )}
+
+      <button
+        type="button"
+        onClick={() => {
+          setShowForm(true);
+          setEditExercise(null);
+        }}
+      >
+        + Add custom exercise
+      </button>
+    </>
+  );
+}
+
+export default Training;
