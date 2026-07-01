@@ -4,6 +4,7 @@ import { type Dog } from "../../types/dog";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import calculateAge from "../../utils/calculateAge";
+import UpcomingVisits from "../../components/VetVisits/UpcomingVisits";
 
 function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -57,6 +58,8 @@ function Home() {
           </Link>
         </div>
       )}
+
+      <UpcomingVisits dogId={data[selectedIndex]._id} />
     </>
   );
 }
