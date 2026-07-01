@@ -18,8 +18,26 @@ function Training({ dogId }: TrainingProps) {
   const { data, setData } = useFetch<TrainingType[]>(api);
   if (!data) return <div className="loader"></div>;
 
+  function statusBar() {
+    if (!data) return <div className="loader"></div>;
+    const totalExercises = data.length;
+    const masteredExercises = data.filter(
+      (ex) => ex.status === "mastered",
+    ).length;
+
+    let progressPercent;
+
+    if (totalExercises === 0) {
+      progressPercent = 0;
+    } else {
+      progressPercent = Math.round((masteredExercises / totalExercises) * 100);
+    }
+
+    return progressPercent;
+  }
+
   function deleteExercise(exerciseId: string) {
-    if (!data) return;
+    if (!data) return <div className="loader"></div>;
     const currentExercise = data;
 
     if (window.confirm("Delete this exercise?")) {
@@ -48,6 +66,8 @@ function Training({ dogId }: TrainingProps) {
   return (
     <>
       <p>training</p>
+
+      <p>Progress: {statusBar()}%</p>
 
       {data &&
         data.map((ex) => (
