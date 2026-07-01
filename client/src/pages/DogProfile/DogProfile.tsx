@@ -8,6 +8,7 @@ import { useState } from "react";
 import EditDog from "../../components/EditDog/EditDog";
 import Journal from "../../components/Journal/Journal";
 import Training from "../../components/Training/Training";
+import calculateAge from "../../utils/calculateAge";
 
 function DogProfile() {
   const params = useParams();
@@ -18,20 +19,7 @@ function DogProfile() {
   const { data, setData } = useFetch<Dog>(api);
   if (!data) return <div className="loader"></div>;
 
-  let age: number | null = null;
-  if (data.birthday) {
-    const birth = new Date(data.birthday);
-    const today = new Date();
-    age = today.getFullYear() - birth.getFullYear();
-
-    if (
-      today.getMonth() < birth.getMonth() ||
-      (today.getMonth() === birth.getMonth() &&
-        today.getDate() < birth.getDate())
-    ) {
-      age = age - 1;
-    }
-  }
+  const age = calculateAge(data.birthday);
 
   function deleteDog() {
     if (window.confirm("Delete this dog?")) {
