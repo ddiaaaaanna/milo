@@ -16,7 +16,7 @@ function Training({ dogId }: TrainingProps) {
 
   const api = `http://localhost:5001/dogs/${dogId}/training`;
   const { data, setData } = useFetch<TrainingType[]>(api);
-  if (!data) return <p>Loading…</p>;
+  if (!data) return <div className="loader"></div>;
 
   function deleteExercise(exerciseId: string) {
     if (!data) return;

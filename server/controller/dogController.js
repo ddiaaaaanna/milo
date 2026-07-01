@@ -1,11 +1,26 @@
 const Dog = require("../models/dog");
+const Training = require("../models/training");
+const defaultExercises = require("../data/defaultExercises");
+
+function createDefaultExercises(dogId) {
+  const exercisesWithDogId = defaultExercises.map((ex) => ({
+    ...ex,
+    dogId: dogId,
+  }));
+  Training.insertMany(exercisesWithDogId)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+}
 
 const addDog = (req, res) => {
   const newDog = new Dog(req.body);
 
   newDog
     .save()
-    .then((result) => res.send(result))
+    .then((result) => {
+      res.send(result);
+      createDefaultExercises(result._id);
+    })
     .catch((error) => console.log(error));
 };
 

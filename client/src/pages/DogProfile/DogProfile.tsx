@@ -16,7 +16,7 @@ function DogProfile() {
 
   const api = `http://localhost:5001/dogs/${params.id}`;
   const { data, setData } = useFetch<Dog>(api);
-  if (!data) return <p>Loading…</p>;
+  if (!data) return <div className="loader"></div>;
 
   let age: number | null = null;
   if (data.birthday) {

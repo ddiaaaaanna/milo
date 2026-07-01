@@ -15,7 +15,7 @@ function Journal({ dogId, name }: JournalProps) {
 
   const api = `http://localhost:5001/dogs/${dogId}/journal`;
   const { data, setData } = useFetch<JournalType[]>(api);
-  if (!data) return <p>Loading…</p>;
+  if (!data) return <div className="loader"></div>;
 
   function deleteJournalEntry(entryId: string) {
     if (!data) return;

@@ -14,7 +14,7 @@ function MedicationList({ dogId }: MedicationProps) {
 
   const api = `http://localhost:5001/dogs/${dogId}/medication`;
   const { data, setData } = useFetch<Medication[]>(api);
-  if (!data) return <p>Loading…</p>;
+  if (!data) return <div className="loader"></div>;
 
   function deleteMedication(medicationId: string) {
     if (!data) return;

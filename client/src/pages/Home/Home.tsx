@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Home() {
   const api = `http://localhost:5001/dogs`;
   const { data } = useFetch<Dog[]>(api);
-  if (!data) return <p>Loading…</p>;
+  if (!data) return <div className="loader"></div>;
 
   return (
     <>

@@ -74,48 +74,57 @@ JPG, PNG or WEBP"
         />
 
         <p>Basic information</p>
-        <label htmlFor="name">DOG NAME</label>
+        <label htmlFor="dog-name">DOG NAME</label>
         <input
+          id="dog-name"
           type="text"
           placeholder="e.g. Martin"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
 
-        <label htmlFor="breed">BREED</label>
+        <label htmlFor="dog-breed">BREED</label>
         <input
+          id="dog-breed"
           type="text"
           placeholder="e.g. Golden Retriever"
           value={breed}
           onChange={(e) => setBreed(e.target.value)}
         />
 
-        <label htmlFor="date">DATE OF BIRTH</label>
+        <label htmlFor="dog-bday">DATE OF BIRTH</label>
         <input
+          id="dog-bday"
           type="date"
           placeholder="dd/mm/yy"
           value={birthday}
           onChange={(e) => setBirthday(e.target.value)}
         />
 
-        <label htmlFor="gender">GENDER</label>
-        <select value={gender} onChange={(e) => setGender(e.target.value)}>
+        <label htmlFor="dog-gender">GENDER</label>
+        <select
+          id="dog-gender"
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
+        >
           <option value="">Select</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
 
         <p>Medical information</p>
-        <label htmlFor="">Weight</label>
+        <label htmlFor="dog-weight">Weight</label>
         <input
+          id="dog-weight"
           type="number"
           placeholder="0.0 kg"
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
         />
 
-        <label htmlFor="">Microchip number</label>
+        <label htmlFor="dog-chip">Microchip number</label>
         <input
+          id="dog-chip"
           type="number"
           placeholder="e.g. 985 121 052 378"
           value={microchip}
@@ -123,8 +132,9 @@ JPG, PNG or WEBP"
         />
 
         <p>Health notes</p>
-        <label htmlFor="">Allergies</label>
+        <label htmlFor="dog-allergies">Allergies</label>
         <input
+          id="dog-allergies"
           type="text"
           placeholder="e.g. Chicken protein"
           value={newAllergy}
@@ -138,8 +148,9 @@ JPG, PNG or WEBP"
           <p key={a}>{a}</p>
         ))}
 
-        <label htmlFor="">Notes</label>
+        <label htmlFor="dog-notes">Notes</label>
         <textarea
+          id="dog-notes"
           placeholder="Any important information about your dog's health, temperament, or care needs..."
           value={notes}
           onChange={(e) => setNotes(e.target.value)}

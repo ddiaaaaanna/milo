@@ -14,7 +14,7 @@ function VetVisits({ dogId }: VetVisitProps) {
 
   const api = `http://localhost:5001/dogs/${dogId}/visits`;
   const { data, setData } = useFetch<VetVisit[]>(api);
-  if (!data) return <p>Loading…</p>;
+  if (!data) return <div className="loader"></div>;
 
   function deleteVisit(visitId: string) {
     if (!data) return;
