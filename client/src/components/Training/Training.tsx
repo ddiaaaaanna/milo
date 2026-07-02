@@ -4,6 +4,7 @@ import { type TrainingType } from "../../types/training";
 import { useState } from "react";
 import ExerciseForm from "./ExerciseForm";
 import ExerciseEditor from "./ExerciseEditor";
+import calculateProgress from "../../utils/calculateProgress";
 
 type TrainingProps = {
   dogId: string;
@@ -18,23 +19,7 @@ function Training({ dogId }: TrainingProps) {
   const { data, setData } = useFetch<TrainingType[]>(api);
   if (!data) return <div className="loader"></div>;
 
-  function statusBar() {
-    if (!data) return <div className="loader"></div>;
-    const totalExercises = data.length;
-    const masteredExercises = data.filter(
-      (ex) => ex.status === "mastered",
-    ).length;
-
-    let progressPercent;
-
-    if (totalExercises === 0) {
-      progressPercent = 0;
-    } else {
-      progressPercent = Math.round((masteredExercises / totalExercises) * 100);
-    }
-
-    return progressPercent;
-  }
+  const progress = calculateProgress(data);
 
   function deleteExercise(exerciseId: string) {
     if (!data) return <div className="loader"></div>;
@@ -67,7 +52,7 @@ function Training({ dogId }: TrainingProps) {
     <>
       <p>training</p>
 
-      <p>Progress: {statusBar()}%</p>
+      <p>Progress: {progress}%</p>
 
       {data &&
         data.map((ex) => (
