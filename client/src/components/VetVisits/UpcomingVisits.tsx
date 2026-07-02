@@ -21,18 +21,26 @@ function UpcomingVisits({ dogId }: UpcomingVisitProps) {
     <>
       <p>Upcoming visits:</p>
 
-      {data &&
+      {upcomingVisits.length === 0 && (
+        <>
+          <p>No upcoming visits</p>
+        </>
+      )}
+
+      {data.length > 0 &&
         upcomingVisits.map((visit) => (
           <div key={visit._id}>
             <p>{visit.reason}</p>
             <p>{visit.vetName}</p>
-            {visit.date
-              ? new Date(visit.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })
-              : "Unknown"}
+            <p>
+              {visit.date
+                ? new Date(visit.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                : "Unknown"}
+            </p>
           </div>
         ))}
     </>

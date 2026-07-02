@@ -4,6 +4,7 @@ export type Medication = {
   dose: string;
   notes?: string;
   reason?: string;
+  ongoing?: boolean;
   frequency?: string;
   customFrequency?: string;
   vetVisitId?: string;

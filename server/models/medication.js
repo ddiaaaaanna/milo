@@ -10,6 +10,7 @@ const MedicationSchema = new Schema(
     frequency: { type: String },
     startDate: { type: Date },
     endDate: { type: Date },
+    ongoing: { type: Boolean },
     dogId: { type: mongoose.Schema.Types.ObjectId, ref: "Dog" },
   },
   { timestamps: true },

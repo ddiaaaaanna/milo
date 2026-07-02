@@ -17,6 +17,7 @@ type MedicationObject = {
   notes: string;
   reason: string;
   frequency: string;
+  ongoing: boolean;
   startDate: string;
   endDate: string;
 };
@@ -35,6 +36,7 @@ function MedicationForm({
         dose: editMedication.dose,
         notes: editMedication.notes || "",
         reason: editMedication.reason || "",
+        ongoing: editMedication.ongoing || false,
         frequency: editMedication.frequency || "",
         startDate: editMedication.startDate
           ? editMedication.startDate.split("T")[0]
@@ -47,6 +49,7 @@ function MedicationForm({
         name: "",
         dose: "",
         notes: "",
+        ongoing: false,
         reason: "",
         frequency: "",
         startDate: "",
@@ -56,7 +59,6 @@ function MedicationForm({
     useState<MedicationObject>(initialMedication);
 
   const [customFrequency, setCustomFrequency] = useState("");
-  const [isOngoing, setIsOngoing] = useState(false);
 
   const [savedMedication, setSavedMedication] = useState(false);
 
@@ -66,12 +68,12 @@ function MedicationForm({
       dose: "",
       notes: "",
       reason: "",
+      ongoing: false,
       frequency: "",
       startDate: "",
       endDate: "",
     });
     setCustomFrequency("");
-    setIsOngoing(false);
   }
 
   function handleSubmit(e: SyntheticEvent) {
@@ -80,7 +82,7 @@ function MedicationForm({
       medication.frequency === "custom"
         ? customFrequency
         : medication.frequency;
-    const finalEndDate = isOngoing ? "" : medication.endDate;
+    const finalEndDate = medication.ongoing ? "" : medication.endDate;
 
     const api = `http://localhost:5001/medication`;
     fetch(api, {
@@ -112,7 +114,7 @@ function MedicationForm({
       medication.frequency === "custom"
         ? customFrequency
         : medication.frequency;
-    const finalEndDate = isOngoing ? "" : medication.endDate;
+    const finalEndDate = medication.ongoing ? "" : medication.endDate;
 
     const api = `http://localhost:5001/medication/${editMedication?._id}`;
     fetch(api, {
@@ -241,7 +243,7 @@ function MedicationForm({
               type="date"
               placeholder="dd/mm/yyyy"
               value={medication.endDate}
-              disabled={isOngoing}
+              disabled={medication.ongoing}
               onChange={(e) =>
                 setMedication({ ...medication, endDate: e.target.value })
               }
@@ -251,8 +253,10 @@ function MedicationForm({
             <input
               id="med-ongoing"
               type="checkbox"
-              checked={isOngoing}
-              onChange={(e) => setIsOngoing(e.target.checked)}
+              checked={medication.ongoing}
+              onChange={(e) =>
+                setMedication({ ...medication, ongoing: e.target.checked })
+              }
             />
 
             <p>Details</p>

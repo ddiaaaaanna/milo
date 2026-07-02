@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import calculateAge from "../../utils/calculateAge";
 import UpcomingVisits from "../../components/VetVisits/UpcomingVisits";
+import UpcomingMedications from "../../components/Medication/UpcomingMedications";
 
 function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -60,6 +61,7 @@ function Home() {
       )}
 
       <UpcomingVisits dogId={data[selectedIndex]._id} />
+      <UpcomingMedications dogId={data[selectedIndex]._id} />
     </>
   );
 }
