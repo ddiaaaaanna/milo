@@ -46,6 +46,7 @@ function Journal({ dogId, name }: JournalProps) {
 
   return (
     <>
+      {data.length < 0 && <p>No entries yet</p>}
       <p>journal</p>
 
       <button
