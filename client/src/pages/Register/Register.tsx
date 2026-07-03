@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
 import { useState, type SyntheticEvent } from "react";
-import { useNavigate } from "react-router-dom";
 
 type UserObject = {
   name: string;
@@ -90,7 +89,6 @@ function Register() {
         />
         {passwordsMatchErr && <p>Passwords do not match</p>}
 
-        {/*  navigate to create dog */}
         <button type="submit">Create account</button>
       </form>
 
