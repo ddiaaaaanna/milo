@@ -7,6 +7,7 @@ const medicationRouter = require("./routes/medicationRoutes");
 const journalRouter = require("./routes/journalRoutes");
 const trainingRouter = require("./routes/trainingRoutes");
 const userRouter = require("./routes/userRoutes");
+const loginRouter = require("./routes/loginRoutes");
 const cors = require("cors");
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(medicationRouter);
 app.use(journalRouter);
 app.use(trainingRouter);
 app.use(userRouter);
+app.use(loginRouter);
 const port = process.env.PORT || 5001;
 
 async function startApp() {
