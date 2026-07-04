@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const loginUser = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
@@ -12,8 +13,13 @@ const loginUser = async (req, res) => {
   const isMatch = await bcrypt.compare(req.body.password, user.password);
 
   if (isMatch) {
-    res.send("Login is complete");
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+    res.send(token);
   } else {
     res.send("Invalid email or password");
   }
 };
+
+module.exports = { loginUser };

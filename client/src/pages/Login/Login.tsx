@@ -29,9 +29,12 @@ function Login() {
       }),
     })
       .then((response) => {
-        return response.json();
+        return response.text();
       })
-      .then(() => navigate("/"))
+      .then((res) => {
+        localStorage.setItem("token", res);
+        navigate("/");
+      })
       .catch((err) => {
         console.log(err);
       });
