@@ -8,6 +8,7 @@ import UpcomingVisits from "../../components/VetVisits/UpcomingVisits";
 import UpcomingMedications from "../../components/Medication/UpcomingMedications";
 import TrainingProgress from "../../components/Training/TrainingProgress";
 import RecentEntries from "../../components/Journal/RecentEntries";
+import Navigation from "../../components/Navigation/Navigation";
 
 function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -20,6 +21,8 @@ function Home() {
 
   return (
     <>
+      <Navigation />
+
       <h1>homepage</h1>
 
       {data.length === 0 && (
