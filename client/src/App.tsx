@@ -6,18 +6,47 @@ import Home from "./pages/Home/Home";
 import CreateDog from "./pages/CreateDog/CreateDog";
 import DogProfile from "./pages/DogProfile/DogProfile";
 import PageNotFound from "./components/404/PageNotFound";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/create" element={<CreateDog />} />
-          <Route path="/dog/:id" element={<DogProfile />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route
+            path="/create"
+            element={
+              <ProtectedRoute>
+                <CreateDog />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dog/:id"
+            element={
+              <ProtectedRoute>
+                <DogProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <ProtectedRoute>
+                <PageNotFound />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>
