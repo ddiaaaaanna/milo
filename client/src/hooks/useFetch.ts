@@ -5,8 +5,10 @@ function useFetch<T>(apiUrl: string) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
+  const token = localStorage.getItem("token") || "";
+
   useEffect(() => {
-    fetch(apiUrl)
+    fetch(apiUrl, { headers: { Authorization: token } })
       .then((response) => response.json())
       .then((result) => {
         setData(result);
