@@ -5,6 +5,7 @@ import Register from "./pages/Register/Register";
 import Home from "./pages/Home/Home";
 import CreateDog from "./pages/CreateDog/CreateDog";
 import DogProfile from "./pages/DogProfile/DogProfile";
+import PageNotFound from "./components/404/PageNotFound";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/create" element={<CreateDog />} />
           <Route path="/dog/:id" element={<DogProfile />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </>
