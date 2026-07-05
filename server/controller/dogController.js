@@ -13,7 +13,7 @@ function createDefaultExercises(dogId) {
 }
 
 const addDog = (req, res) => {
-  const newDog = new Dog(req.body);
+  const newDog = new Dog({ ...req.body, userId: req.userId });
 
   newDog
     .save()
@@ -48,7 +48,7 @@ const getDog = (req, res) => {
 };
 
 const getDogs = (req, res) => {
-  Dog.find()
+  Dog.find({ userId: req.userId })
     .then((result) => res.json(result))
     .catch((error) => console.log(error));
 };

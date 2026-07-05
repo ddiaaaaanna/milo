@@ -12,6 +12,7 @@ const DogSchema = new Schema(
     weight: { type: String },
     microchip: { type: String },
     allergies: { type: [String] },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true },
 );

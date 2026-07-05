@@ -17,6 +17,17 @@ function Home() {
   const { data } = useFetch<Dog[]>(api);
   if (!data) return <div className="loader"></div>;
 
+  if (data.length === 0) {
+    return (
+      <>
+        <p>No dogs yet</p>
+        <Link to="/create">
+          <button>Add dog</button>
+        </Link>
+      </>
+    );
+  }
+
   const age = calculateAge(data[selectedIndex].birthday);
 
   return (
@@ -24,15 +35,6 @@ function Home() {
       <Navigation />
 
       <h1>homepage</h1>
-
-      {data.length === 0 && (
-        <>
-          <p>No dogs yet</p>
-          <Link to="/create">
-            <button>Add dog</button>
-          </Link>
-        </>
-      )}
 
       {data.map((d, index) => (
         <button key={d._id} onClick={() => setSelectedIndex(index)}>

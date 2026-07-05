@@ -1,6 +1,7 @@
 import "./CreateDog.css";
 import { useState, type SyntheticEvent } from "react";
 import type { Dog } from "../../types/dog";
+import { useNavigate } from "react-router-dom";
 
 function CreateDog() {
   const [name, setName] = useState("");
@@ -15,6 +16,7 @@ function CreateDog() {
 
   const [savedDog, setSavedDog] = useState<Dog | null>(null);
   console.log(savedDog);
+  const navigate = useNavigate();
 
   function handleAddAllergy() {
     setAllergies([...allergies, newAllergy]);
@@ -47,6 +49,7 @@ function CreateDog() {
         return response.json();
       })
       .then((newDog) => setSavedDog(newDog));
+    navigate("/");
   }
 
   function handleCancel() {
