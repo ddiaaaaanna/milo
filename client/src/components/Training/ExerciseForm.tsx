@@ -29,6 +29,7 @@ function ExerciseForm({
 
   const [exercise, setExercise] = useState<ExerciseObject>(initialExercise);
   const [savedExercise, setSavedExercise] = useState(false);
+  const token = localStorage.getItem("token") || "";
 
   function clearForm() {
     setExercise({
@@ -47,6 +48,7 @@ function ExerciseForm({
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify({
         ...exercise,

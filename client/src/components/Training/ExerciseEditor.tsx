@@ -36,12 +36,14 @@ function ExerciseEditor({
 
   function updateTraining(e: SyntheticEvent) {
     e.preventDefault();
+    const token = localStorage.getItem("token") || "";
 
     const api = `http://localhost:5001/training/${editExercise?._id}`;
     fetch(api, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify({
         ...editedTraining,

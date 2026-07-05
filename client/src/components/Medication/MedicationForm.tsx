@@ -61,6 +61,7 @@ function MedicationForm({
   const [customFrequency, setCustomFrequency] = useState("");
 
   const [savedMedication, setSavedMedication] = useState(false);
+  const token = localStorage.getItem("token") || "";
 
   function clearForm() {
     setMedication({
@@ -89,6 +90,7 @@ function MedicationForm({
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify({
         ...medication,
@@ -121,6 +123,7 @@ function MedicationForm({
       method: "PUT",
       headers: {
         "Content-type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify({
         ...medication,

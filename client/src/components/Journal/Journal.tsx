@@ -20,10 +20,14 @@ function Journal({ dogId, name }: JournalProps) {
   function deleteJournalEntry(entryId: string) {
     if (!data) return;
     const currentEntry = data;
+    const token = localStorage.getItem("token") || "";
 
     if (window.confirm("Delete this entry?")) {
       fetch(`http://localhost:5001/journal/${entryId}`, {
         method: "DELETE",
+        headers: {
+          Authorization: token,
+        },
       }).then(() => {
         const updated = currentEntry.filter((entry) => entry._id !== entryId);
         setData(updated);

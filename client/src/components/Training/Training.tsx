@@ -24,10 +24,14 @@ function Training({ dogId }: TrainingProps) {
   function deleteExercise(exerciseId: string) {
     if (!data) return <div className="loader"></div>;
     const currentExercise = data;
+    const token = localStorage.getItem("token") || "";
 
     if (window.confirm("Delete this exercise?")) {
       fetch(`http://localhost:5001/training/${exerciseId}`, {
         method: "DELETE",
+        headers: {
+          Authorization: token,
+        },
       }).then(() => {
         const updated = currentExercise.filter((ex) => ex._id !== exerciseId);
         setData(updated);

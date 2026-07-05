@@ -24,11 +24,13 @@ function CreateDog() {
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
 
+    const token = localStorage.getItem("token") || "";
     const api = `http://localhost:5001/dogs`;
     fetch(api, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify({
         name,

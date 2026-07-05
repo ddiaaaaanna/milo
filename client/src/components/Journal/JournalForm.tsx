@@ -44,6 +44,7 @@ function JournalForm({
 
   const [entry, setEntry] = useState<JournalObject>(initialEntry);
   const [savedEntry, setSavedEntry] = useState(false);
+  const token = localStorage.getItem("token") || "";
 
   function clearForm() {
     setEntry({
@@ -62,6 +63,7 @@ function JournalForm({
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify({
         ...entry,
@@ -87,6 +89,7 @@ function JournalForm({
       method: "PUT",
       headers: {
         "Content-type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify({
         ...entry,

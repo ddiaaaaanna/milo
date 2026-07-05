@@ -48,10 +48,12 @@ function EditDog({ dog, setShowForm, updateDogData }: EditDogType) {
     e.preventDefault();
 
     const api = `http://localhost:5001/dogs/${dog._id}`;
+    const token = localStorage.getItem("token") || "";
     fetch(api, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify({
         ...dogData,

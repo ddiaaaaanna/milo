@@ -19,10 +19,14 @@ function VetVisits({ dogId }: VetVisitProps) {
   function deleteVisit(visitId: string) {
     if (!data) return;
     const currentVisits = data;
+    const token = localStorage.getItem("token") || "";
 
     if (window.confirm("Delete this visit?")) {
       fetch(`http://localhost:5001/visits/${visitId}`, {
         method: "DELETE",
+        headers: {
+          Authorization: token,
+        },
       }).then(() => {
         const updated = currentVisits.filter((visit) => visit._id !== visitId);
         setData(updated);

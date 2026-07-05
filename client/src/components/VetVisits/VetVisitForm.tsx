@@ -51,6 +51,7 @@ function VetVisitForm({
 
   const [visit, setVisit] = useState<VetVisitObject>(initialVisit);
   const [savedVisit, setSavedVisit] = useState(false);
+  const token = localStorage.getItem("token") || "";
 
   function clearForm() {
     setVisit({
@@ -72,6 +73,7 @@ function VetVisitForm({
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify({
         ...visit,
@@ -96,6 +98,7 @@ function VetVisitForm({
       method: "PUT",
       headers: {
         "Content-type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify({
         ...visit,

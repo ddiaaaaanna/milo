@@ -19,10 +19,14 @@ function MedicationList({ dogId }: MedicationProps) {
   function deleteMedication(medicationId: string) {
     if (!data) return;
     const currentMedication = data;
+    const token = localStorage.getItem("token") || "";
 
     if (window.confirm("Delete this medication?")) {
       fetch(`http://localhost:5001/medication/${medicationId}`, {
         method: "DELETE",
+        headers: {
+          Authorization: token,
+        },
       }).then(() => {
         const updated = currentMedication.filter(
           (medication) => medication._id !== medicationId,

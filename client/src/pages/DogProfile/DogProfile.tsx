@@ -22,8 +22,14 @@ function DogProfile() {
   const age = calculateAge(data.birthday);
 
   function deleteDog() {
+    const token = localStorage.getItem("token") || "";
     if (window.confirm("Delete this dog?")) {
-      fetch(api, { method: "DELETE" }).then(() => navigate("/"));
+      fetch(api, {
+        method: "DELETE",
+        headers: {
+          Authorization: token,
+        },
+      }).then(() => navigate("/"));
     }
   }
 
