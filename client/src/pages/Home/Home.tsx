@@ -31,47 +31,47 @@ function Home() {
   const age = calculateAge(data[selectedIndex].birthday);
 
   return (
-    <>
+    <div className="app-layout">
       <Navigation />
 
-      <h1>homepage</h1>
+      <div className="page-content">
+        {data.map((d, index) => (
+          <button key={d._id} onClick={() => setSelectedIndex(index)}>
+            <p>{d.name}</p>
+          </button>
+        ))}
 
-      {data.map((d, index) => (
-        <button key={d._id} onClick={() => setSelectedIndex(index)}>
-          <p>{d.name}</p>
-        </button>
-      ))}
+        {data && (
+          <div>
+            <p>Age :{age}</p>
+            <p>Gender: {data[selectedIndex].gender}</p>
+            <p>Weight: {data[selectedIndex].weight}kg</p>
 
-      {data && (
-        <div>
-          <p>Age :{age}</p>
-          <p>Gender: {data[selectedIndex].gender}</p>
-          <p>Weight: {data[selectedIndex].weight}kg</p>
+            <p>
+              Birthday:
+              {data[selectedIndex].birthday
+                ? new Date(data[selectedIndex].birthday).toLocaleDateString(
+                    "en-US",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    },
+                  )
+                : "Unknown"}
+            </p>
+            <Link to={`/dog/${data[selectedIndex]._id}`}>
+              <p>Open full profile →</p>
+            </Link>
+          </div>
+        )}
 
-          <p>
-            Birthday:
-            {data[selectedIndex].birthday
-              ? new Date(data[selectedIndex].birthday).toLocaleDateString(
-                  "en-US",
-                  {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  },
-                )
-              : "Unknown"}
-          </p>
-          <Link to={`/dog/${data[selectedIndex]._id}`}>
-            <p>Open full profile →</p>
-          </Link>
-        </div>
-      )}
-
-      <UpcomingVisits dogId={data[selectedIndex]._id} />
-      <UpcomingMedications dogId={data[selectedIndex]._id} />
-      <TrainingProgress dogId={data[selectedIndex]._id} />
-      <RecentEntries dogId={data[selectedIndex]._id} />
-    </>
+        <UpcomingVisits dogId={data[selectedIndex]._id} />
+        <UpcomingMedications dogId={data[selectedIndex]._id} />
+        <TrainingProgress dogId={data[selectedIndex]._id} />
+        <RecentEntries dogId={data[selectedIndex]._id} />
+      </div>
+    </div>
   );
 }
 
