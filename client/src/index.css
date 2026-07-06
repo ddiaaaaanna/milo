@@ -1,9 +1,38 @@
+:root {
+  --background-main: #f1fbf4;
+  --glass-border: 1px solid rgba(120, 100, 70, 0.18);
+  --glass-bg: rgba(245, 240, 230, 0.55);
+  --glass-bg-dark: rgba(110, 100, 80, 0.12);
+  --glass-bg-hover: rgba(245, 240, 230, 0.75);
+  --text-title: rgba(60, 55, 45, 0.95);
+  --text-dark: rgba(70, 62, 50, 0.92);
+  --text-main: rgba(120, 110, 95, 0.85);
+  --text-action-btn: rgba(245, 240, 230, 0.95);
+  --text-input: rgba(60, 55, 45, 0.85);
+  --border-radius: 8px;
+  --border-radius-sm: 6px;
+  --text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  --card-shadow: 0 4px 20px rgba(80, 70, 55, 0.12);
+  --card-shadow-md: 0 6px 30px rgba(80, 70, 55, 0.18);
+  --focus-outline: 2px solid rgba(120, 100, 70, 0.4);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
 }
 
 p {
   margin: 0;
+}
+
+li {
+  list-style: none;
 }
 
 .loader {
