@@ -71,6 +71,7 @@ function Register() {
 
         <div className="auth-right">
           <h1>Create an account</h1>
+          <p>Free forever. No credit card required.</p>
 
           <form onSubmit={createUser}>
             <label htmlFor="register-name">Full name</label>

@@ -1,6 +1,8 @@
 import "./Login.css";
+import "../../styles/AuthStyles.css";
 import { useNavigate } from "react-router-dom";
 import { useState, type SyntheticEvent } from "react";
+import { Link } from "react-router-dom";
 
 type LoginObject = {
   email: string;
@@ -42,34 +44,53 @@ function Login() {
 
   return (
     <>
-      <h1>Welcome back</h1>
-      <p>Sign in to view your dog's records.</p>
+      <div className="auth-page auth-page--login">
+        <div className="auth-left">
+          <img src="/milo-logo.png" width={"400px"} />
+          <div className="text-part">
+            <h1>Every moment with your dog deserves to be remembered.</h1>
+            <p>
+              Health records, training milestones, vet visits, and journal
+              entries — all in one calm, organized place.
+            </p>
+          </div>
+        </div>
 
-      <form onSubmit={login}>
-        <label htmlFor="login-email">Email</label>
-        <input
-          id="login-email"
-          type="email"
-          placeholder="you@example.com"
-          value={loginUser.email}
-          onChange={(e) =>
-            setLoginUser({ ...loginUser, email: e.target.value })
-          }
-        />
+        <div className="auth-right">
+          <h1>Welcome back</h1>
+          <p>Sign in to view your dog's records.</p>
 
-        <label htmlFor="login-pw">Password</label>
-        <input
-          id="login-pw"
-          type="password"
-          placeholder="•••••••"
-          value={loginUser.password}
-          onChange={(e) =>
-            setLoginUser({ ...loginUser, password: e.target.value })
-          }
-        />
+          <form onSubmit={login}>
+            <label htmlFor="login-email">Email</label>
+            <input
+              id="login-email"
+              type="email"
+              placeholder="you@example.com"
+              value={loginUser.email}
+              onChange={(e) =>
+                setLoginUser({ ...loginUser, email: e.target.value })
+              }
+            />
 
-        <button type="submit">Login</button>
-      </form>
+            <label htmlFor="login-pw">Password</label>
+            <input
+              id="login-pw"
+              type="password"
+              placeholder="•••••••"
+              value={loginUser.password}
+              onChange={(e) =>
+                setLoginUser({ ...loginUser, password: e.target.value })
+              }
+            />
+
+            <button type="submit">Login</button>
+          </form>
+
+          <p>
+            Don't have an account? <Link to="/register">Create Account</Link>
+          </p>
+        </div>
+      </div>
     </>
   );
 }

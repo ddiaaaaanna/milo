@@ -1,0 +1,5 @@
+.auth-page--login {
+  --auth-bg-image: url("/login-photo.jpeg");
+  --auth-bg-position: 40% 40%;
+  --auth-bg-size: 120%;
+}

@@ -21,8 +21,8 @@
   background:
     linear-gradient(rgba(80, 90, 55, 0.5), rgba(45, 55, 30, 0.65)),
     var(--auth-bg-image);
-  background-position: 90% 80%;
-  background-size: cover;
+  background-position: var(--auth-bg-position);
+  background-size: var(--auth-bg-size);
   z-index: 0;
 }
 
@@ -60,7 +60,11 @@
 
 .auth-right h1 {
   color: #4a5a2f;
+}
+
+.auth-right p {
   margin-bottom: 20px;
+  font-size: 0.9rem;
 }
 
 .auth-right form {
