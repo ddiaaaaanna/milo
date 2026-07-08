@@ -37,6 +37,10 @@ li {
   list-style: none;
 }
 
+textarea {
+  font-family: inherit;
+}
+
 .loader {
   width: 50px;
   padding: 8px;

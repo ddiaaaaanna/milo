@@ -6,9 +6,11 @@ import { useState } from "react";
 
 type VetVisitProps = {
   dogId: string;
+  name: string;
+  breed: string;
 };
 
-function VetVisits({ dogId }: VetVisitProps) {
+function VetVisits({ dogId, name, breed }: VetVisitProps) {
   const [showForm, setShowForm] = useState<boolean>(false);
   const [editVisit, setEditVisit] = useState<VetVisit | null>(null);
 
@@ -92,6 +94,8 @@ function VetVisits({ dogId }: VetVisitProps) {
           editVisit={editVisit}
           setEditVisit={setEditVisit}
           handleEditVisit={handleEditVisit}
+          name={name}
+          breed={breed}
         />
       )}
     </>
