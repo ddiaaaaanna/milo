@@ -1,4 +1,5 @@
-import "./MedicationForm.css";
+import "../../styles/FormStyles.css";
+import { Pill } from "lucide-react";
 import { useState, type SyntheticEvent } from "react";
 import { type Medication } from "../../types/medication";
 
@@ -9,6 +10,8 @@ type MedicationProps = {
   editMedication: Medication | null;
   setEditMedication: (value: Medication | null) => void;
   handleEditMedication: (updatedMed: Medication) => void;
+  name: string;
+  breed: string;
 };
 
 type MedicationObject = {
@@ -29,6 +32,8 @@ function MedicationForm({
   editMedication,
   setEditMedication,
   handleEditMedication,
+  name,
+  breed,
 }: MedicationProps) {
   const initialMedication = editMedication
     ? {
@@ -155,145 +160,163 @@ function MedicationForm({
   }
 
   return (
-    <>
-      {savedMedication && (
-        <>
-          <p>Your medication was logged</p>
-          <button onClick={handleMoreMedication}>Add more medication</button>
-          <button onClick={resetForms}>See medication</button>
-        </>
-      )}
+    <div className="form-container">
+      <div className="form-modal">
+        {savedMedication && (
+          <div className="form-saved">
+            <p>Your medication was logged</p>
+            <button onClick={handleMoreMedication}>Add more medication</button>
+            <button onClick={resetForms}>See medication</button>
+          </div>
+        )}
 
-      {!savedMedication && (
-        <>
-          {editMedication ? (
-            <h1>Edit medication</h1>
-          ) : (
-            <h1>Add new medication</h1>
-          )}
+        {!savedMedication && (
+          <>
+            <div className="form-header">
+              <div className="form-header-info">
+                <Pill />
+                <div className="form-header-txt">
+                  {editMedication ? (
+                    <h1>Edit medication</h1>
+                  ) : (
+                    <h1>Add new medication</h1>
+                  )}
+                  <p>
+                    {name} {breed && `· ${breed}`}
+                  </p>
+                </div>
+              </div>
+              <button onClick={resetForms}>x</button>
+            </div>
 
-          <button onClick={resetForms}>x</button>
-
-          <form onSubmit={editMedication ? updateMedication : handleSubmit}>
-            <label htmlFor="med-name">*Medication name</label>
-            <input
-              id="med-name"
-              type="text"
-              placeholder="e.g. Brevecto"
-              value={medication.name}
-              onChange={(e) =>
-                setMedication({ ...medication, name: e.target.value })
-              }
-            />
-
-            <p>Dosage</p>
-
-            <label htmlFor="med-dose-amount">Dose Amount</label>
-            <input
-              id="med-dose-amount"
-              type="text"
-              placeholder="e.g. 25"
-              value={medication.dose}
-              onChange={(e) =>
-                setMedication({ ...medication, dose: e.target.value })
-              }
-            />
-
-            <label htmlFor="med-frequency">Frequency</label>
-            <select
-              id="med-frequency"
-              value={medication.frequency}
-              onChange={(e) =>
-                setMedication({ ...medication, frequency: e.target.value })
-              }
+            <form
+              onSubmit={editMedication ? updateMedication : handleSubmit}
+              className="form-content"
             >
-              <option value="">Select frequency</option>
-              <option value="once">Once daily</option>
-              <option value="twice">Twice daily</option>
-              <option value="eight-hrs">Every 8 hours</option>
-              <option value="twelve-hrs">Every 12 hours</option>
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="as-needed">As needed</option>
-              <option value="custom">Custom</option>
-            </select>
+              <div className="form-scroll">
+                <label htmlFor="med-name">*Medication name</label>
+                <input
+                  id="med-name"
+                  type="text"
+                  placeholder="e.g. Brevecto"
+                  value={medication.name}
+                  onChange={(e) =>
+                    setMedication({ ...medication, name: e.target.value })
+                  }
+                />
 
-            {medication.frequency === "custom" && (
-              <input
-                type="text"
-                placeholder="e.g. every Saturday and Sunday"
-                value={customFrequency}
-                onChange={(e) => setCustomFrequency(e.target.value)}
-              />
-            )}
+                <p>Dosage</p>
 
-            <p>Schedule</p>
+                <label htmlFor="med-dose-amount">Dose Amount</label>
+                <input
+                  id="med-dose-amount"
+                  type="text"
+                  placeholder="e.g. 25"
+                  value={medication.dose}
+                  onChange={(e) =>
+                    setMedication({ ...medication, dose: e.target.value })
+                  }
+                />
 
-            <label htmlFor="med-start">Start date</label>
-            <input
-              id="med-start"
-              type="date"
-              placeholder="dd/mm/yyyy"
-              value={medication.startDate}
-              onChange={(e) =>
-                setMedication({ ...medication, startDate: e.target.value })
-              }
-            />
+                <label htmlFor="med-frequency">Frequency</label>
+                <select
+                  id="med-frequency"
+                  value={medication.frequency}
+                  onChange={(e) =>
+                    setMedication({ ...medication, frequency: e.target.value })
+                  }
+                >
+                  <option value="">Select frequency</option>
+                  <option value="once">Once daily</option>
+                  <option value="twice">Twice daily</option>
+                  <option value="eight-hrs">Every 8 hours</option>
+                  <option value="twelve-hrs">Every 12 hours</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="as-needed">As needed</option>
+                  <option value="custom">Custom</option>
+                </select>
 
-            <label htmlFor="med-end">End date</label>
-            <input
-              id="med-end"
-              type="date"
-              placeholder="dd/mm/yyyy"
-              value={medication.endDate}
-              disabled={medication.ongoing}
-              onChange={(e) =>
-                setMedication({ ...medication, endDate: e.target.value })
-              }
-            />
+                {medication.frequency === "custom" && (
+                  <input
+                    type="text"
+                    placeholder="e.g. every Saturday and Sunday"
+                    value={customFrequency}
+                    onChange={(e) => setCustomFrequency(e.target.value)}
+                  />
+                )}
 
-            <label htmlFor="med-ongoing">Ongoing - no end date</label>
-            <input
-              id="med-ongoing"
-              type="checkbox"
-              checked={medication.ongoing}
-              onChange={(e) =>
-                setMedication({ ...medication, ongoing: e.target.checked })
-              }
-            />
+                <p>Schedule</p>
 
-            <p>Details</p>
+                <label htmlFor="med-start">Start date</label>
+                <input
+                  id="med-start"
+                  type="date"
+                  placeholder="dd/mm/yyyy"
+                  value={medication.startDate}
+                  onChange={(e) =>
+                    setMedication({ ...medication, startDate: e.target.value })
+                  }
+                />
 
-            <label htmlFor="med-reason">Reason / condition treated</label>
-            <input
-              id="med-reason"
-              type="text"
-              placeholder="e.g. Allergy"
-              value={medication.reason}
-              onChange={(e) =>
-                setMedication({ ...medication, reason: e.target.value })
-              }
-            />
+                <label htmlFor="med-end">End date</label>
+                <input
+                  id="med-end"
+                  type="date"
+                  placeholder="dd/mm/yyyy"
+                  value={medication.endDate}
+                  disabled={medication.ongoing}
+                  onChange={(e) =>
+                    setMedication({ ...medication, endDate: e.target.value })
+                  }
+                />
 
-            <label htmlFor="med-instructions">Instructions & notes</label>
-            <input
-              id="med-instructions"
-              type="text"
-              placeholder="e.g. Give with food, store in fridge, monitor for side effects..."
-              value={medication.notes}
-              onChange={(e) =>
-                setMedication({ ...medication, notes: e.target.value })
-              }
-            />
+                <label htmlFor="med-ongoing">Ongoing - no end date</label>
+                <input
+                  id="med-ongoing"
+                  type="checkbox"
+                  checked={medication.ongoing}
+                  onChange={(e) =>
+                    setMedication({ ...medication, ongoing: e.target.checked })
+                  }
+                />
 
-            <button type="button" onClick={resetForms}>
-              Cancel
-            </button>
-            <button type="submit">Save medication →</button>
-          </form>
-        </>
-      )}
-    </>
+                <p>Details</p>
+
+                <label htmlFor="med-reason">Reason / condition treated</label>
+                <input
+                  id="med-reason"
+                  type="text"
+                  placeholder="e.g. Allergy"
+                  value={medication.reason}
+                  onChange={(e) =>
+                    setMedication({ ...medication, reason: e.target.value })
+                  }
+                />
+
+                <label htmlFor="med-instructions">Instructions & notes</label>
+                <input
+                  id="med-instructions"
+                  type="text"
+                  placeholder="e.g. Give with food, store in fridge, monitor for side effects..."
+                  value={medication.notes}
+                  onChange={(e) =>
+                    setMedication({ ...medication, notes: e.target.value })
+                  }
+                />
+              </div>
+
+              <div className="button-container">
+                <button type="button" onClick={resetForms}>
+                  Cancel
+                </button>
+                <button type="submit">Save medication →</button>
+              </div>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
   );
 }
 

@@ -6,9 +6,11 @@ import { useState } from "react";
 
 type MedicationProps = {
   dogId: string;
+  name: string;
+  breed: string;
 };
 
-function MedicationList({ dogId }: MedicationProps) {
+function MedicationList({ dogId, name, breed }: MedicationProps) {
   const [showForm, setShowForm] = useState<boolean>(false);
   const [editMedication, setEditMedication] = useState<Medication | null>(null);
 
@@ -95,6 +97,8 @@ function MedicationList({ dogId }: MedicationProps) {
           editMedication={editMedication}
           setEditMedication={setEditMedication}
           handleEditMedication={handleEditMedication}
+          name={name}
+          breed={breed}
         />
       )}
     </>
