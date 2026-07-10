@@ -1,6 +1,7 @@
-import "./ExerciseForm.css";
+import "../../styles/FormStyles.css";
 import { type TrainingType } from "../../types/training";
 import { useState, type SyntheticEvent } from "react";
+import { NotebookPen } from "lucide-react";
 
 type ExerciseFormProps = {
   dogId: string;
@@ -77,103 +78,123 @@ function ExerciseForm({
   }
 
   return (
-    <>
-      {savedExercise && (
-        <>
-          <p>Your exercise was logged</p>
-          <button onClick={handleMoreExercises}>Add another exercise</button>
-          <button onClick={resetForms}>See Exercises</button>
-        </>
-      )}
+    <div className="form-container">
+      <div className="form-modal">
+        {savedExercise && (
+          <div className="form-saved">
+            <p>Your exercise was logged</p>
+            <button onClick={handleMoreExercises}>Add another exercise</button>
+            <button onClick={resetForms}>See Exercises</button>
+          </div>
+        )}
 
-      {!savedExercise && (
-        <>
-          <h1>Add new exercise</h1>
-
-          <button onClick={resetForms}>x</button>
-
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="exercise-name">Exercise name *</label>
-            <input
-              type="text"
-              id="exercise-name"
-              placeholder="e.g. Bark, fetch, wave..."
-              value={exercise.exerciseName}
-              onChange={(e) =>
-                setExercise({ ...exercise, exerciseName: e.target.value })
-              }
-            />
-
-            <p>Difficulty</p>
-
-            <div>
-              <button
-                type="button"
-                onClick={() => setExercise({ ...exercise, difficulty: "easy" })}
-              >
-                Easy
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  setExercise({ ...exercise, difficulty: "medium" })
-                }
-              >
-                Medium
-              </button>
-              <button
-                type="button"
-                onClick={() => setExercise({ ...exercise, difficulty: "hard" })}
-              >
-                Hard
-              </button>
+        {!savedExercise && (
+          <>
+            <div className="form-header">
+              <div className="form-header-info">
+                <NotebookPen />
+                <div className="form-header-txt">
+                  <h1>Add new exercise</h1>
+                </div>
+              </div>
+              <button onClick={resetForms}>x</button>
             </div>
 
-            <label htmlFor="exercise-description">Description / goal </label>
-            <textarea
-              id="exercise-description"
-              placeholder="What does success look like? Describe the behavior you're training..."
-              value={exercise.description}
-              onChange={(e) =>
-                setExercise({ ...exercise, description: e.target.value })
-              }
-            ></textarea>
+            <form onSubmit={handleSubmit} className="form-content">
+              <div className="form-scroll">
+                <label htmlFor="exercise-name">Exercise name *</label>
+                <input
+                  type="text"
+                  id="exercise-name"
+                  placeholder="e.g. Bark, fetch, wave..."
+                  value={exercise.exerciseName}
+                  onChange={(e) =>
+                    setExercise({ ...exercise, exerciseName: e.target.value })
+                  }
+                />
 
-            <p>Starting status</p>
+                <p>Difficulty</p>
 
-            <div>
-              <button
-                type="button"
-                onClick={() =>
-                  setExercise({ ...exercise, status: "not-started" })
-                }
-              >
-                Not Started
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  setExercise({ ...exercise, status: "in-progress" })
-                }
-              >
-                In Progress
-              </button>
-              <button
-                type="button"
-                onClick={() => setExercise({ ...exercise, status: "mastered" })}
-              >
-                Mastered
-              </button>
-            </div>
+                <div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setExercise({ ...exercise, difficulty: "easy" })
+                    }
+                  >
+                    Easy
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setExercise({ ...exercise, difficulty: "medium" })
+                    }
+                  >
+                    Medium
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setExercise({ ...exercise, difficulty: "hard" })
+                    }
+                  >
+                    Hard
+                  </button>
+                </div>
 
-            <button type="button" onClick={resetForms}>
-              Cancel
-            </button>
-            <button type="submit">+ Add Exercise</button>
-          </form>
-        </>
-      )}
-    </>
+                <label htmlFor="exercise-description">
+                  Description / goal{" "}
+                </label>
+                <textarea
+                  id="exercise-description"
+                  placeholder="What does success look like? Describe the behavior you're training..."
+                  value={exercise.description}
+                  onChange={(e) =>
+                    setExercise({ ...exercise, description: e.target.value })
+                  }
+                ></textarea>
+
+                <p>Starting status</p>
+
+                <div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setExercise({ ...exercise, status: "not-started" })
+                    }
+                  >
+                    Not Started
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setExercise({ ...exercise, status: "in-progress" })
+                    }
+                  >
+                    In Progress
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setExercise({ ...exercise, status: "mastered" })
+                    }
+                  >
+                    Mastered
+                  </button>
+                </div>
+              </div>
+
+              <div className="button-container">
+                <button type="button" onClick={resetForms}>
+                  Cancel
+                </button>
+                <button type="submit">+ Add Exercise</button>
+              </div>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
   );
 }
 

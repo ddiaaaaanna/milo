@@ -1,6 +1,5 @@
 import "../../styles/FormStyles.css";
 import type { JournalType } from "../../types/journal";
-import "./JournalForm.css";
 import { useState, type SyntheticEvent } from "react";
 import { NotebookPen } from "lucide-react";
 
