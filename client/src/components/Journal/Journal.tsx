@@ -7,9 +7,10 @@ import JournalForm from "./JournalForm";
 type JournalProps = {
   dogId: string;
   name: string;
+  breed: string;
 };
 
-function Journal({ dogId, name }: JournalProps) {
+function Journal({ dogId, name, breed }: JournalProps) {
   const [showForm, setShowForm] = useState(false);
   const [editEntry, setEditEntry] = useState<JournalType | null>(null);
 
@@ -94,6 +95,7 @@ function Journal({ dogId, name }: JournalProps) {
           setEditEntry={setEditEntry}
           handleEditEntry={handleEditEntry}
           name={name}
+          breed={breed}
         />
       )}
     </>

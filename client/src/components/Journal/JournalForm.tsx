@@ -1,6 +1,8 @@
+import "../../styles/FormStyles.css";
 import type { JournalType } from "../../types/journal";
 import "./JournalForm.css";
 import { useState, type SyntheticEvent } from "react";
+import { NotebookPen } from "lucide-react";
 
 type JournalFormProps = {
   dogId: string;
@@ -10,6 +12,7 @@ type JournalFormProps = {
   setEditEntry: (value: JournalType | null) => void;
   handleEditEntry: (updatedJournalEntry: JournalType) => void;
   name: string;
+  breed: string;
 };
 
 type JournalObject = {
@@ -27,6 +30,7 @@ function JournalForm({
   setEditEntry,
   handleEditEntry,
   name,
+  breed,
 }: JournalFormProps) {
   const initialEntry = editEntry
     ? {
@@ -119,58 +123,81 @@ function JournalForm({
   }
 
   return (
-    <>
-      {savedEntry && (
-        <>
-          <p>Your entry was logged</p>
-          <button onClick={handleMoreEntries}>Add another entry</button>
-          <button onClick={resetForms}>See Entries</button>
-        </>
-      )}
+    <div className="form-container">
+      <div className="form-modal">
+        {savedEntry && (
+          <div className="form-saved">
+            <p>Your entry was logged</p>
+            <button onClick={handleMoreEntries}>Add another entry</button>
+            <button onClick={resetForms}>See Entries</button>
+          </div>
+        )}
 
-      {!savedEntry && (
-        <>
-          {editEntry ? <h1>Edit entry</h1> : <h1>Add new entry</h1>}
+        {!savedEntry && (
+          <>
+            <div className="form-header">
+              <div className="form-header-info">
+                <NotebookPen />
+                <div className="form-header-txt">
+                  {editEntry ? <h1>Edit entry</h1> : <h1>Add new entry</h1>}
+                  <p>
+                    {name} {breed && `· ${breed}`}
+                  </p>
+                </div>
+              </div>
 
-          <button onClick={resetForms}>x</button>
+              <button onClick={resetForms}>x</button>
+            </div>
 
-          <form onSubmit={editEntry ? updateEntry : handleSubmit}>
-            <label htmlFor="journal-title">Title *</label>
-            <input
-              type="text"
-              id="journal-title"
-              placeholder="e.g. First swim, vet visit update..."
-              value={entry.title}
-              onChange={(e) => setEntry({ ...entry, title: e.target.value })}
-            />
+            <form
+              onSubmit={editEntry ? updateEntry : handleSubmit}
+              className="form-content"
+            >
+              <div className="form-scroll">
+                <label htmlFor="journal-title">Title *</label>
+                <input
+                  type="text"
+                  id="journal-title"
+                  placeholder="e.g. First swim, vet visit update..."
+                  value={entry.title}
+                  onChange={(e) =>
+                    setEntry({ ...entry, title: e.target.value })
+                  }
+                />
 
-            <label htmlFor="journal-date">Date</label>
-            <input
-              id="journal-date"
-              type="date"
-              placeholder="dd/mm/yyyy"
-              value={entry.date}
-              onChange={(e) => setEntry({ ...entry, date: e.target.value })}
-            />
+                <label htmlFor="journal-date">Date</label>
+                <input
+                  id="journal-date"
+                  type="date"
+                  placeholder="dd/mm/yyyy"
+                  value={entry.date}
+                  onChange={(e) => setEntry({ ...entry, date: e.target.value })}
+                />
 
-            <label htmlFor="journal-entry">Entry</label>
-            <input
-              style={{ width: "500px" }}
-              id="journal-entry"
-              type="text"
-              placeholder={`What happened today? How was ${name}? Write freely...`}
-              value={entry.entry}
-              onChange={(e) => setEntry({ ...entry, entry: e.target.value })}
-            />
+                <label htmlFor="journal-entry">Entry</label>
+                <input
+                  style={{ width: "500px" }}
+                  id="journal-entry"
+                  type="text"
+                  placeholder={`What happened today? How was ${name}? Write freely...`}
+                  value={entry.entry}
+                  onChange={(e) =>
+                    setEntry({ ...entry, entry: e.target.value })
+                  }
+                />
+              </div>
 
-            <button type="button" onClick={resetForms}>
-              Cancel
-            </button>
-            <button type="submit">Save entry</button>
-          </form>
-        </>
-      )}
-    </>
+              <div className="button-container">
+                <button type="button" onClick={resetForms}>
+                  Cancel
+                </button>
+                <button type="submit">Save entry</button>
+              </div>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
   );
 }
 

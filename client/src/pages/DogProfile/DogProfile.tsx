@@ -82,7 +82,7 @@ function DogProfile() {
 
       <VetVisits dogId={data._id} name={data.name} breed={data.breed} />
       <MedicationList dogId={data._id} name={data.name} breed={data.breed} />
-      <Journal dogId={data._id} name={data.name} />
+      <Journal dogId={data._id} name={data.name} breed={data.breed} />
       <Training dogId={data._id} />
     </>
   );
