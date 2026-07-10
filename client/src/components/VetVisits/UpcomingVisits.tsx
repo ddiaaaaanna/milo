@@ -1,6 +1,7 @@
 import "./UpcomingVisits.css";
 import useFetch from "../../hooks/useFetch";
 import { type VetVisit } from "../../types/vetVisit";
+import { CalendarHeart } from "lucide-react";
 
 type UpcomingVisitProps = {
   dogId: string;
@@ -18,8 +19,11 @@ function UpcomingVisits({ dogId }: UpcomingVisitProps) {
   );
 
   return (
-    <>
-      <p>Upcoming visits:</p>
+    <div className="dashboard-card">
+      <div className="card-header">
+        <CalendarHeart size={18} color=" #4a5a2f" />
+        <h4>Upcoming appointments:</h4>
+      </div>
 
       {upcomingVisits.length === 0 && (
         <>
@@ -43,7 +47,7 @@ function UpcomingVisits({ dogId }: UpcomingVisitProps) {
             </p>
           </div>
         ))}
-    </>
+    </div>
   );
 }
 

@@ -1,6 +1,7 @@
 import "./RecentEntries.css";
 import useFetch from "../../hooks/useFetch";
 import { type JournalType } from "../../types/journal";
+import { BookHeart } from "lucide-react";
 
 type RecentEntriesProps = {
   dogId: string;
@@ -18,8 +19,12 @@ function RecentEntries({ dogId }: RecentEntriesProps) {
   const showRecents = recents.slice(0, 3);
 
   return (
-    <>
-      <p>Recent Journal</p>
+    <div className="dashboard-card">
+      <div className="card-header">
+        <BookHeart size={18} color=" #4a5a2f" />
+        <h4>Recent Journal</h4>
+      </div>
+
       {data.length === 0 && <p>No entries yet</p>}
 
       {data.length > 0 &&
@@ -30,7 +35,7 @@ function RecentEntries({ dogId }: RecentEntriesProps) {
             <p>{new Date(e.date).toLocaleDateString()}</p>
           </div>
         ))}
-    </>
+    </div>
   );
 }
 

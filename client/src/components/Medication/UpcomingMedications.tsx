@@ -1,6 +1,7 @@
 import "./UpcomingMedications.css";
 import useFetch from "../../hooks/useFetch";
 import { type Medication } from "../../types/medication";
+import { Pill } from "lucide-react";
 
 type UpcomingMedicationProps = {
   dogId: string;
@@ -19,11 +20,15 @@ function UpcomingMedications({ dogId }: UpcomingMedicationProps) {
   );
 
   return (
-    <>
-      {data.length === 0 && <p>No medications due</p>}
+    <div className="dashboard-card">
+      <div className="card-header">
+        <Pill size={18} color=" #4a5a2f" />
+        <h4>Medications due: </h4>
+      </div>
 
-      <p>Medications due: </p>
-      {data.length > 0 &&
+      {medicationsDue.length === 0 && <p>No medications yet</p>}
+
+      {medicationsDue.length > 0 &&
         medicationsDue.map((med) => (
           <div key={med._id}>
             <p>{med.name}</p>
@@ -40,7 +45,7 @@ function UpcomingMedications({ dogId }: UpcomingMedicationProps) {
             </p>
           </div>
         ))}
-    </>
+    </div>
   );
 }
 

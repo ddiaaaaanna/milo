@@ -1,4 +1,67 @@
-nav {
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-dog-card {
+  grid-row: 1 / span 2;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: var(--glass-border);
+  border-radius: var(--border-radius);
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+}
+
+.dashboard-summaries {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.dashboard-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: var(--glass-border);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+}
+
+.dashboard-card h2,
+.dashboard-card h3 {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+  color: var(--text-dark);
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-header {
+  display: flex;
+  gap: 5px;
+}
+
+.card-header h4 {
+  font-weight: bold;
+  color: #4a5a2f;
+}
+
+@media (max-width: 1000px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-dog-card {
+    grid-row: auto;
+  }
+  .dashboard-summaries {
+    grid-template-columns: 1fr;
+  }
 }

@@ -35,14 +35,14 @@ function Home() {
       <Navigation />
 
       <div className="page-content">
-        {data.map((d, index) => (
-          <button key={d._id} onClick={() => setSelectedIndex(index)}>
-            <p>{d.name}</p>
-          </button>
-        ))}
+        <div className="dashboard-grid">
+          <div className="dashboard-dog-card">
+            {data.map((d, index) => (
+              <button key={d._id} onClick={() => setSelectedIndex(index)}>
+                <p>{d.name}</p>
+              </button>
+            ))}
 
-        {data && (
-          <div>
             <p>Age :{age}</p>
             <p>Gender: {data[selectedIndex].gender}</p>
             <p>Weight: {data[selectedIndex].weight}kg</p>
@@ -52,11 +52,7 @@ function Home() {
               {data[selectedIndex].birthday
                 ? new Date(data[selectedIndex].birthday).toLocaleDateString(
                     "en-US",
-                    {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    },
+                    { year: "numeric", month: "long", day: "numeric" },
                   )
                 : "Unknown"}
             </p>
@@ -64,12 +60,14 @@ function Home() {
               <p>Open full profile →</p>
             </Link>
           </div>
-        )}
 
-        <UpcomingVisits dogId={data[selectedIndex]._id} />
-        <UpcomingMedications dogId={data[selectedIndex]._id} />
-        <TrainingProgress dogId={data[selectedIndex]._id} />
-        <RecentEntries dogId={data[selectedIndex]._id} />
+          <div className="dashboard-summaries">
+            <UpcomingVisits dogId={data[selectedIndex]._id} />
+            <UpcomingMedications dogId={data[selectedIndex]._id} />
+            <TrainingProgress dogId={data[selectedIndex]._id} />
+            <RecentEntries dogId={data[selectedIndex]._id} />
+          </div>
+        </div>
       </div>
     </div>
   );
