@@ -1,13 +1,38 @@
-.photo {
-  border: 1px solid red;
-  width: fit-content;
-  padding: 20px;
+.dog-profile-page a {
+  color: var(--text-dark);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 16px;
 }
 
 .dog-info {
   display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+.photo-part .photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 12px;
+  background: rgba(74, 90, 47, 0.12);
+  display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+  color: var(--text-main);
+  font-size: 0.85rem;
+  padding: 0;
+  border: none;
+}
+
+.text-part {
+  flex: 1;
 }
 
 .main-part {
@@ -15,9 +40,63 @@
 }
 
 .profile-name {
-  font-size: 24px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
 }
 
 .profile-breed {
-  font-size: 18px;
+  font-size: 1.05rem;
+  color: var(--text-main);
+  margin: 4px 0 0;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+}
+
+.info-grid p {
+  color: var(--text-dark);
+  font-size: 0.95rem;
+}
+
+.profile-buttons {
+  display: flex;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.profile-buttons button {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(74, 90, 47, 0.25);
+  border-radius: var(--border-radius-sm);
+  background: transparent;
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+.profile-buttons button:hover {
+  background: rgba(74, 90, 47, 0.1);
+}
+
+.profile-buttons button:last-child {
+  color: #8a3a3a;
+  border-color: rgba(138, 58, 58, 0.3);
+}
+
+.profile-buttons button:last-child:hover {
+  background: rgba(138, 58, 58, 0.08);
+}
+
+.card-add-btn {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  background-color: #4a5a2f;
+  color: #fff;
 }

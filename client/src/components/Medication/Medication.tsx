@@ -3,6 +3,7 @@ import useFetch from "../../hooks/useFetch";
 import { type Medication } from "../../types/medication";
 import MedicationForm from "./MedicationForm";
 import { useState } from "react";
+import { Pill } from "lucide-react";
 
 type MedicationProps = {
   dogId: string;
@@ -52,8 +53,13 @@ function MedicationList({ dogId, name, breed }: MedicationProps) {
   }
 
   return (
-    <>
-      <p>medication</p>
+    <div className="dashboard-card">
+      <div className="card-header">
+        <Pill />
+        <h3>Medication</h3>
+      </div>
+
+      {data.length === 0 && <p>No medication yet</p>}
 
       <button
         type="button"
@@ -61,8 +67,9 @@ function MedicationList({ dogId, name, breed }: MedicationProps) {
           setShowForm(true);
           setEditMedication(null);
         }}
+        className="card-add-btn"
       >
-        💊 Add medication
+        + Add medication
       </button>
 
       {data &&
@@ -101,7 +108,7 @@ function MedicationList({ dogId, name, breed }: MedicationProps) {
           breed={breed}
         />
       )}
-    </>
+    </div>
   );
 }
 

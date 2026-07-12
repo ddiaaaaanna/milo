@@ -3,6 +3,7 @@ import useFetch from "../../hooks/useFetch";
 import { type JournalType } from "../../types/journal";
 import { useState } from "react";
 import JournalForm from "./JournalForm";
+import { BookHeart } from "lucide-react";
 
 type JournalProps = {
   dogId: string;
@@ -50,16 +51,20 @@ function Journal({ dogId, name, breed }: JournalProps) {
   }
 
   return (
-    <>
-      {data.length < 0 && <p>No entries yet</p>}
-      <p>journal</p>
+    <div className="dashboard-card">
+      <div className="card-header">
+        <BookHeart />
+        <h3>Journal</h3>
+      </div>
 
+      {data.length === 0 && <p>No entries yet</p>}
       <button
         type="button"
         onClick={() => {
           setShowForm(true);
           setEditEntry(null);
         }}
+        className="card-add-btn"
       >
         New journal entry
       </button>
@@ -98,7 +103,7 @@ function Journal({ dogId, name, breed }: JournalProps) {
           breed={breed}
         />
       )}
-    </>
+    </div>
   );
 }
 

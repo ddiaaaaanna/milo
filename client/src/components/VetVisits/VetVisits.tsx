@@ -3,6 +3,7 @@ import useFetch from "../../hooks/useFetch";
 import { type VetVisit } from "../../types/vetVisit";
 import VetVisitForm from "./VetVisitForm";
 import { useState } from "react";
+import { CalendarHeart } from "lucide-react";
 
 type VetVisitProps = {
   dogId: string;
@@ -50,8 +51,13 @@ function VetVisits({ dogId, name, breed }: VetVisitProps) {
   }
 
   return (
-    <>
-      <p>vet visits</p>
+    <div className="dashboard-card">
+      <div className="card-header">
+        <CalendarHeart />
+        <h3>Vet Visits</h3>
+      </div>
+
+      {data.length === 0 && <p>No visits scheduled</p>}
 
       <button
         type="button"
@@ -59,6 +65,7 @@ function VetVisits({ dogId, name, breed }: VetVisitProps) {
           setShowForm(true);
           setEditVisit(null);
         }}
+        className="card-add-btn"
       >
         + Add vet visit
       </button>
@@ -98,7 +105,7 @@ function VetVisits({ dogId, name, breed }: VetVisitProps) {
           breed={breed}
         />
       )}
-    </>
+    </div>
   );
 }
 

@@ -9,6 +9,7 @@ import EditDog from "../../components/EditDog/EditDog";
 import Journal from "../../components/Journal/Journal";
 import Training from "../../components/Training/Training";
 import calculateAge from "../../utils/calculateAge";
+import Navigation from "../../components/Navigation/Navigation";
 
 function DogProfile() {
   const params = useParams();
@@ -34,57 +35,68 @@ function DogProfile() {
   }
 
   return (
-    <>
-      {data && (
-        <>
-          <Link to="/">← Back to dashboard</Link>
-          <div className="dog-info">
-            <div className="photo-part">
-              <p className="photo">photo here</p>
-            </div>
-            <div className="text-part">
-              <div className="main-part">
-                <p className="profile-name">{data.name}</p>
-                <p className="profile-breed">{data.breed}</p>
-                <p>Age: {age !== null ? `${age} years` : "Unknown"}</p>
+    <div className="app-layout">
+      <Navigation />
+
+      <div className="page-content">
+        {data && (
+          <>
+            <Link to="/">← Back to dashboard</Link>
+            <div className="dog-info">
+              <div className="photo-part">
+                <p className="photo">photo here</p>
+              </div>
+              <div className="text-part">
+                <div className="main-part">
+                  <p className="profile-name">{data.name}</p>
+                  <p className="profile-breed">{data.breed}</p>
+                  <p>Age: {age !== null ? `${age} years` : "Unknown"}</p>
+                </div>
+                <div className="info-grid">
+                  <p>
+                    Birthday:
+                    {data.birthday
+                      ? new Date(data.birthday).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })
+                      : "Unknown"}
+                  </p>
+
+                  <p>Gender: {data.gender}</p>
+                  <p>Weight: {data.weight} kg</p>
+                  <p>Notes: {data.notes}</p>
+                  <p>Allergies: {data.allergies}</p>
+                </div>
               </div>
 
-              <p>
-                Birthday:
-                {data.birthday
-                  ? new Date(data.birthday).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })
-                  : "Unknown"}
-              </p>
-
-              <p>Gender: {data.gender}</p>
-              <p>Weight: {data.weight} kg</p>
-              <p>Notes: {data.notes}</p>
-              <p>Allergies: {data.allergies}</p>
+              <div className="profile-buttons">
+                <button type="button" onClick={() => setShowForm(true)}>
+                  Edit Dog
+                </button>
+                <button type="button" onClick={deleteDog}>
+                  Delete Dog
+                </button>
+              </div>
             </div>
+          </>
+        )}
 
-            <button type="button" onClick={() => setShowForm(true)}>
-              Edit Dog
-            </button>
-            <button type="button" onClick={deleteDog}>
-              Delete Dog
-            </button>
-          </div>
-        </>
-      )}
+        {showForm && (
+          <EditDog
+            dog={data}
+            setShowForm={setShowForm}
+            updateDogData={setData}
+          />
+        )}
 
-      {showForm && (
-        <EditDog dog={data} setShowForm={setShowForm} updateDogData={setData} />
-      )}
-
-      <VetVisits dogId={data._id} name={data.name} breed={data.breed} />
-      <MedicationList dogId={data._id} name={data.name} breed={data.breed} />
-      <Journal dogId={data._id} name={data.name} breed={data.breed} />
-      <Training dogId={data._id} />
-    </>
+        <VetVisits dogId={data._id} name={data.name} breed={data.breed} />
+        <MedicationList dogId={data._id} name={data.name} breed={data.breed} />
+        <Journal dogId={data._id} name={data.name} breed={data.breed} />
+        <Training dogId={data._id} />
+      </div>
+    </div>
   );
 }
 

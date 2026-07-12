@@ -5,6 +5,7 @@ import { useState } from "react";
 import ExerciseForm from "./ExerciseForm";
 import ExerciseEditor from "./ExerciseEditor";
 import calculateProgress from "../../utils/calculateProgress";
+import { Dumbbell } from "lucide-react";
 
 type TrainingProps = {
   dogId: string;
@@ -53,8 +54,11 @@ function Training({ dogId }: TrainingProps) {
   }
 
   return (
-    <>
-      <p>training</p>
+    <div className="dashboard-card">
+      <div className="card-header">
+        <Dumbbell />
+        <h3>Training</h3>
+      </div>
 
       <p>Progress: {progress}%</p>
 
@@ -101,10 +105,11 @@ function Training({ dogId }: TrainingProps) {
           setShowForm(true);
           setEditExercise(null);
         }}
+        className="card-add-btn"
       >
         + Add custom exercise
       </button>
-    </>
+    </div>
   );
 }
 

@@ -10,8 +10,6 @@
 .dashboard-dog-card {
   grid-row: 1 / span 2;
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border: var(--glass-border);
   border-radius: var(--border-radius);
   padding: 24px;
@@ -26,8 +24,6 @@
 
 .dashboard-card {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border: var(--glass-border);
   border-radius: var(--border-radius);
   padding: 20px;
