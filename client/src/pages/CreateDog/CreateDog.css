@@ -1,0 +1,128 @@
+.addDog-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f7f4ec;
+}
+
+.addDog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 28px 36px 20px;
+  border-bottom: 1px solid rgba(74, 90, 47, 0.12);
+  flex-shrink: 0;
+}
+
+.addDog-header-info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.addDog-header-info h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: #3a3a2f;
+}
+
+.addDog-header-info p {
+  margin: 2px 0 0;
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.addDog-header > button {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-main);
+  cursor: pointer;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+}
+
+.addDog-header > button:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.addDog-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.addDog-content label {
+  color: var(--text-main);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  margin-top: 16px;
+}
+
+.addDog-content input,
+.addDog-content textarea,
+.addDog-content select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(74, 90, 47, 0.18);
+  border-radius: 10px;
+  background: #fdfcf8;
+  color: var(--text-input);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.addDog-content input:focus,
+.addDog-content textarea:focus,
+.addDog-content select:focus {
+  border-color: rgba(74, 90, 47, 0.5);
+}
+
+.addDog-content textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.addDog-content > p {
+  text-align: center;
+  color: var(--text-main);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 24px 0 4px;
+  position: relative;
+}
+
+.addDog-button-container {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  padding: 20px 36px;
+  border-top: 1px solid rgba(74, 90, 47, 0.12);
+  flex-shrink: 0;
+}
+
+.addDog-button-container button {
+  padding: 0.8rem 1.8rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.addDog-button-container button[type="submit"] {
+  background-color: #b5703a;
+  color: #fff;
+}
+
+.addDog-button-container .cancel {
+  background: transparent;
+  color: var(--text-dark);
+}
