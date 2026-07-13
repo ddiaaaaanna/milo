@@ -6,11 +6,11 @@ A dog life record app built with TypeScript / React / mongoDB.
 
 ## Photos
 
-[Milo dashboard](./client/public/images/app-sc1.jpg)
+![Milo dashboard](./client/public/app-sc1.jpg)
 
-![Milo dog profile](./client/public/images/app-sc2.jpg)
+![Milo dog profile](./client/public/app-sc2.jpg)
 
-![Milo health tracking](./client/public/images/app-sc3.jpg)
+![Milo health tracking](./client/public/app-sc3.jpg)
 
 ## About
 
