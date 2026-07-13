@@ -2,15 +2,15 @@
 
 A dog life record app built with TypeScript / React / mongoDB.
 
-**[Live Demo →](milo-swart.vercel.app)**
+**[Live Demo →](https://milo-swart.vercel.app)**
 
 ## Photos
 
-![App Screenshot](./public/images/app-sc1.jpg)
+[Milo dashboard](./client/public/images/app-sc1.jpg)
 
-![App Screenshot](./public/images/app-sc2.jpg)
+![Milo dog profile](./client/public/images/app-sc2.jpg)
 
-![App Screenshot](./public/images/app-sc3.jpg)
+![Milo health tracking](./client/public/images/app-sc3.jpg)
 
 ## About
 
@@ -39,5 +39,6 @@ An app to track your dog's health, training and memories.
 
 Coming soon:
 
-- Settings page
-- Mobile app version built with React Native
+- Photo upload with Cloudinary
+- Dog profile tabs
+- Setting page with delete profile, change theme
