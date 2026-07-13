@@ -9,6 +9,7 @@ import UpcomingMedications from "../../components/Medication/UpcomingMedications
 import TrainingProgress from "../../components/Training/TrainingProgress";
 import RecentEntries from "../../components/Journal/RecentEntries";
 import Navigation from "../../components/Navigation/Navigation";
+import { PawPrint } from "lucide-react";
 
 function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -19,12 +20,25 @@ function Home() {
 
   if (data.length === 0) {
     return (
-      <>
-        <p>No dogs yet</p>
-        <Link to="/create">
-          <button>Add dog</button>
-        </Link>
-      </>
+      <div className="app-layout">
+        <Navigation />
+
+        <div className="page-content empty-state">
+          <h1>
+            <PawPrint />
+            No dogs yet
+          </h1>
+
+          <p>
+            Add your first dog to start tracking health, training and memories
+            all in one place.
+          </p>
+          <Link to="/create">
+            <button>+ Add your dog</button>
+          </Link>
+          <img src="/1.png" alt="" width={"500px"} />
+        </div>
+      </div>
     );
   }
 
