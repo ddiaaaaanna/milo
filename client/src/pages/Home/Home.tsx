@@ -36,7 +36,7 @@ function Home() {
           <Link to="/create">
             <button>+ Add your dog</button>
           </Link>
-          <img src="/1.png" alt="" width={"500px"} />
+          <img src="/empty-state.png" alt="" width={"500px"} />
         </div>
       </div>
     );

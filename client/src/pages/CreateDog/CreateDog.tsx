@@ -19,6 +19,8 @@ function CreateDog() {
   const navigate = useNavigate();
 
   function handleAddAllergy() {
+    if (!newAllergy.trim()) return;
+
     setAllergies([...allergies, newAllergy]);
     setNewAllergy("");
   }
@@ -88,43 +90,55 @@ JPG, PNG or WEBP"
             />
 
             <p>Basic information</p>
-            <label htmlFor="dog-name">DOG NAME</label>
-            <input
-              id="dog-name"
-              type="text"
-              placeholder="e.g. Martin"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+            <div className="form-row">
+              <div className="form-field">
+                <label htmlFor="dog-name">DOG NAME</label>
+                <input
+                  id="dog-name"
+                  type="text"
+                  placeholder="e.g. Martin"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
 
-            <label htmlFor="dog-breed">BREED</label>
-            <input
-              id="dog-breed"
-              type="text"
-              placeholder="e.g. Golden Retriever"
-              value={breed}
-              onChange={(e) => setBreed(e.target.value)}
-            />
+              <div className="form-field">
+                <label htmlFor="dog-breed">BREED</label>
+                <input
+                  id="dog-breed"
+                  type="text"
+                  placeholder="e.g. Golden Retriever"
+                  value={breed}
+                  onChange={(e) => setBreed(e.target.value)}
+                />
+              </div>
+            </div>
 
-            <label htmlFor="dog-bday">DATE OF BIRTH</label>
-            <input
-              id="dog-bday"
-              type="date"
-              placeholder="dd/mm/yy"
-              value={birthday}
-              onChange={(e) => setBirthday(e.target.value)}
-            />
+            <div className="form-row">
+              <div className="form-field">
+                <label htmlFor="dog-bday">DATE OF BIRTH</label>
+                <input
+                  id="dog-bday"
+                  type="date"
+                  placeholder="dd/mm/yy"
+                  value={birthday}
+                  onChange={(e) => setBirthday(e.target.value)}
+                />
+              </div>
 
-            <label htmlFor="dog-gender">GENDER</label>
-            <select
-              id="dog-gender"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            >
-              <option value="">Select</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
+              <div className="form-field">
+                <label htmlFor="dog-gender">GENDER</label>
+                <select
+                  id="dog-gender"
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                >
+                  <option value="">Select</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
 
             <p>Medical information</p>
             <label htmlFor="dog-weight">Weight</label>
@@ -147,20 +161,24 @@ JPG, PNG or WEBP"
 
             <p>Health notes</p>
             <label htmlFor="dog-allergies">Allergies</label>
-            <input
-              id="dog-allergies"
-              type="text"
-              placeholder="e.g. Chicken protein"
-              value={newAllergy}
-              onChange={(e) => setNewAllergy(e.target.value)}
-            />
-            <button type="button" onClick={handleAddAllergy}>
-              Add
-            </button>
+            <div className="input-with-button">
+              <input
+                id="dog-allergies"
+                type="text"
+                placeholder="e.g. Chicken protein"
+                value={newAllergy}
+                onChange={(e) => setNewAllergy(e.target.value)}
+              />
+              <button type="button" onClick={handleAddAllergy}>
+                Add
+              </button>
+            </div>
 
-            {allergies.map((a) => (
-              <p key={a}>{a}</p>
-            ))}
+            <div className="allergy-container">
+              {allergies.map((a) => (
+                <p key={a}>{a}</p>
+              ))}
+            </div>
 
             <label htmlFor="dog-notes">Notes</label>
             <textarea

@@ -27,7 +27,8 @@
   color: #3a3a2f;
 }
 
-.addDog-header-info p {
+.addDog-header-info p,
+.allergy-container p {
   margin: 2px 0 0;
   color: var(--text-main);
   font-size: 0.95rem;
@@ -118,11 +119,53 @@
 }
 
 .addDog-button-container button[type="submit"] {
-  background-color: #b5703a;
+  background-color: #4a5a2f;
   color: #fff;
 }
 
 .addDog-button-container .cancel {
   background: transparent;
   color: var(--text-dark);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-with-button {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.input-with-button input {
+  flex: 1;
+}
+
+.input-with-button button {
+  padding: 0 1.2rem;
+  border: 1px solid rgba(74, 90, 47, 0.3);
+  border-radius: 10px;
+  background: rgba(74, 90, 47, 0.1);
+  color: #3a4a25;
+  font-size: 0.9rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.input-with-button button:hover {
+  background: rgba(74, 90, 47, 0.18);
+}
+
+.allergy-container {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
