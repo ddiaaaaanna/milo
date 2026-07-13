@@ -14,6 +14,7 @@ function Login() {
     email: "",
     password: "",
   });
+  const [loginError, setLoginError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -31,9 +32,14 @@ function Login() {
       }),
     })
       .then((response) => {
+        if (!response.ok) {
+          setLoginError(true);
+          return;
+        }
         return response.text();
       })
       .then((res) => {
+        if (!res) return;
         localStorage.setItem("token", res);
         navigate("/");
       })
@@ -84,6 +90,12 @@ function Login() {
             />
 
             <button type="submit">Login</button>
+
+            {loginError && (
+              <p className="login-error">
+                This account does not exist. Please create an account.
+              </p>
+            )}
           </form>
 
           <p>

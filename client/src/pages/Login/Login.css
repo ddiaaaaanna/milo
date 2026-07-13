@@ -3,3 +3,7 @@
   --auth-bg-position: 40% 40%;
   --auth-bg-size: 120%;
 }
+
+.login-error {
+  color: rgb(157, 3, 3);
+}
