@@ -8,7 +8,7 @@ type UpcomingMedicationProps = {
 };
 
 function UpcomingMedications({ dogId }: UpcomingMedicationProps) {
-  const api = `http://localhost:5001/dogs/${dogId}/medication`;
+  const api = `${import.meta.env.VITE_API_URL}/dogs/${dogId}/medication`;
   const { data } = useFetch<Medication[]>(api);
   if (!data) return <div className="loader"></div>;
 

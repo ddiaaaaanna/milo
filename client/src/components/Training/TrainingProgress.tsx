@@ -9,7 +9,7 @@ type TrainingProgressProps = {
 };
 
 function TrainingProgress({ dogId }: TrainingProgressProps) {
-  const api = `http://localhost:5001/dogs/${dogId}/training`;
+  const api = `${import.meta.env.VITE_API_URL}/dogs/${dogId}/training`;
   const { data } = useFetch<TrainingType[]>(api);
   if (!data) return <div className="loader"></div>;
 

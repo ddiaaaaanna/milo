@@ -48,7 +48,7 @@ function EditDog({ dog, setShowForm, updateDogData }: EditDogType) {
   function updateDog(e: SyntheticEvent) {
     e.preventDefault();
 
-    const api = `http://localhost:5001/dogs/${dog._id}`;
+    const api = `${import.meta.env.VITE_API_URL}/dogs/${dog._id}`;
     const token = localStorage.getItem("token") || "";
     fetch(api, {
       method: "PUT",

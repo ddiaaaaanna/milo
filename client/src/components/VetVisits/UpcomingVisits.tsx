@@ -8,7 +8,7 @@ type UpcomingVisitProps = {
 };
 
 function UpcomingVisits({ dogId }: UpcomingVisitProps) {
-  const api = `http://localhost:5001/dogs/${dogId}/visits`;
+  const api = `${import.meta.env.VITE_API_URL}/dogs/${dogId}/visits`;
   const { data } = useFetch<VetVisit[]>(api);
   if (!data) return <div className="loader"></div>;
 

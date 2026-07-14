@@ -29,7 +29,7 @@ function CreateDog() {
     e.preventDefault();
 
     const token = localStorage.getItem("token") || "";
-    const api = `http://localhost:5001/dogs`;
+    const api = `${import.meta.env.VITE_API_URL}/dogs`;
     fetch(api, {
       method: "POST",
       headers: {

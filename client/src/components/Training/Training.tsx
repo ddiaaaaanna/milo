@@ -16,7 +16,7 @@ function Training({ dogId }: TrainingProps) {
   const [showEditForm, setShowEditForm] = useState(false);
   const [editExercise, setEditExercise] = useState<TrainingType | null>(null);
 
-  const api = `http://localhost:5001/dogs/${dogId}/training`;
+  const api = `${import.meta.env.VITE_API_URL}/dogs/${dogId}/training`;
   const { data, setData } = useFetch<TrainingType[]>(api);
   if (!data) return <div className="loader"></div>;
 
@@ -28,7 +28,7 @@ function Training({ dogId }: TrainingProps) {
     const token = localStorage.getItem("token") || "";
 
     if (window.confirm("Delete this exercise?")) {
-      fetch(`http://localhost:5001/training/${exerciseId}`, {
+      fetch(`${import.meta.env.VITE_API_URL}/training/${exerciseId}`, {
         method: "DELETE",
         headers: {
           Authorization: token,

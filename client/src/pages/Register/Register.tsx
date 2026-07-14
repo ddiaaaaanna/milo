@@ -29,7 +29,7 @@ function Register() {
       return;
     }
 
-    const api = `http://localhost:5001/user`;
+    const api = `${import.meta.env.VITE_API_URL}/user`;
     fetch(api, {
       method: "POST",
       headers: {

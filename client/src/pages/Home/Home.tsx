@@ -14,7 +14,7 @@ import { PawPrint } from "lucide-react";
 function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const api = `http://localhost:5001/dogs`;
+  const api = `${import.meta.env.VITE_API_URL}/dogs`;
   const { data } = useFetch<Dog[]>(api);
   if (!data) return <div className="loader"></div>;
 

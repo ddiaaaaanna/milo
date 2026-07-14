@@ -39,7 +39,7 @@ function ExerciseEditor({
     e.preventDefault();
     const token = localStorage.getItem("token") || "";
 
-    const api = `http://localhost:5001/training/${editExercise?._id}`;
+    const api = `${import.meta.env.VITE_API_URL}/training/${editExercise?._id}`;
     fetch(api, {
       method: "PUT",
       headers: {

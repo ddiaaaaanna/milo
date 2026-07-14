@@ -15,7 +15,7 @@ function VetVisits({ dogId, name, breed }: VetVisitProps) {
   const [showForm, setShowForm] = useState<boolean>(false);
   const [editVisit, setEditVisit] = useState<VetVisit | null>(null);
 
-  const api = `http://localhost:5001/dogs/${dogId}/visits`;
+  const api = `${import.meta.env.VITE_API_URL}/dogs/${dogId}/visits`;
   const { data, setData } = useFetch<VetVisit[]>(api);
   if (!data) return <div className="loader"></div>;
 
@@ -25,7 +25,7 @@ function VetVisits({ dogId, name, breed }: VetVisitProps) {
     const token = localStorage.getItem("token") || "";
 
     if (window.confirm("Delete this visit?")) {
-      fetch(`http://localhost:5001/visits/${visitId}`, {
+      fetch(`${import.meta.env.VITE_API_URL}/visits/${visitId}`, {
         method: "DELETE",
         headers: {
           Authorization: token,

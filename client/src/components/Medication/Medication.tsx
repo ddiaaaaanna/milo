@@ -15,7 +15,7 @@ function MedicationList({ dogId, name, breed }: MedicationProps) {
   const [showForm, setShowForm] = useState<boolean>(false);
   const [editMedication, setEditMedication] = useState<Medication | null>(null);
 
-  const api = `http://localhost:5001/dogs/${dogId}/medication`;
+  const api = `${import.meta.env.VITE_API_URL}/dogs/${dogId}/medication`;
   const { data, setData } = useFetch<Medication[]>(api);
   if (!data) return <div className="loader"></div>;
 
@@ -25,7 +25,7 @@ function MedicationList({ dogId, name, breed }: MedicationProps) {
     const token = localStorage.getItem("token") || "";
 
     if (window.confirm("Delete this medication?")) {
-      fetch(`http://localhost:5001/medication/${medicationId}`, {
+      fetch(`${import.meta.env.VITE_API_URL}/medication/${medicationId}`, {
         method: "DELETE",
         headers: {
           Authorization: token,

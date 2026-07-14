@@ -73,7 +73,7 @@ function VetVisitForm({
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
 
-    const api = `http://localhost:5001/visits`;
+    const api = `${import.meta.env.VITE_API_URL}/visits`;
     fetch(api, {
       method: "POST",
       headers: {
@@ -98,7 +98,7 @@ function VetVisitForm({
   function updateVisit(e: SyntheticEvent) {
     e.preventDefault();
 
-    const api = `http://localhost:5001/visits/${editVisit?._id}`;
+    const api = `${import.meta.env.VITE_API_URL}/visits/${editVisit?._id}`;
     fetch(api, {
       method: "PUT",
       headers: {

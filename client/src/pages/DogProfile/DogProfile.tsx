@@ -16,7 +16,7 @@ function DogProfile() {
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
 
-  const api = `http://localhost:5001/dogs/${params.id}`;
+  const api = `${import.meta.env.VITE_API_URL}/dogs/${params.id}`;
   const { data, setData } = useFetch<Dog>(api);
   if (!data) return <div className="loader"></div>;
 

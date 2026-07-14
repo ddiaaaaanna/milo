@@ -21,7 +21,7 @@ function Login() {
   function login(e: SyntheticEvent) {
     e.preventDefault();
 
-    const api = `http://localhost:5001/login`;
+    const api = `${import.meta.env.VITE_API_URL}/login`;
     fetch(api, {
       method: "POST",
       headers: {

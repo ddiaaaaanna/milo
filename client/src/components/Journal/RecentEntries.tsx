@@ -8,7 +8,7 @@ type RecentEntriesProps = {
 };
 
 function RecentEntries({ dogId }: RecentEntriesProps) {
-  const api = `http://localhost:5001/dogs/${dogId}/journal`;
+  const api = `${import.meta.env.VITE_API_URL}/dogs/${dogId}/journal`;
   const { data } = useFetch<JournalType[]>(api);
   if (!data) return <div className="loader"></div>;
 

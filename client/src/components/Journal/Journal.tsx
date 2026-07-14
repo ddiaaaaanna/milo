@@ -15,7 +15,7 @@ function Journal({ dogId, name, breed }: JournalProps) {
   const [showForm, setShowForm] = useState(false);
   const [editEntry, setEditEntry] = useState<JournalType | null>(null);
 
-  const api = `http://localhost:5001/dogs/${dogId}/journal`;
+  const api = `${import.meta.env.VITE_API_URL}/dogs/${dogId}/journal`;
   const { data, setData } = useFetch<JournalType[]>(api);
   if (!data) return <div className="loader"></div>;
 
@@ -25,7 +25,7 @@ function Journal({ dogId, name, breed }: JournalProps) {
     const token = localStorage.getItem("token") || "";
 
     if (window.confirm("Delete this entry?")) {
-      fetch(`http://localhost:5001/journal/${entryId}`, {
+      fetch(`${import.meta.env.VITE_API_URL}/journal/${entryId}`, {
         method: "DELETE",
         headers: {
           Authorization: token,

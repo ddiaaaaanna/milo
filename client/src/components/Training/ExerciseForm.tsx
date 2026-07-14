@@ -44,7 +44,7 @@ function ExerciseForm({
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
 
-    const api = `http://localhost:5001/training`;
+    const api = `${import.meta.env.VITE_API_URL}/training`;
     fetch(api, {
       method: "POST",
       headers: {

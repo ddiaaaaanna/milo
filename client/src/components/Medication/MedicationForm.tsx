@@ -90,7 +90,7 @@ function MedicationForm({
         : medication.frequency;
     const finalEndDate = medication.ongoing ? "" : medication.endDate;
 
-    const api = `http://localhost:5001/medication`;
+    const api = `${import.meta.env.VITE_API_URL}/medication`;
     fetch(api, {
       method: "POST",
       headers: {
@@ -123,7 +123,7 @@ function MedicationForm({
         : medication.frequency;
     const finalEndDate = medication.ongoing ? "" : medication.endDate;
 
-    const api = `http://localhost:5001/medication/${editMedication?._id}`;
+    const api = `${import.meta.env.VITE_API_URL}/medication/${editMedication?._id}`;
     fetch(api, {
       method: "PUT",
       headers: {

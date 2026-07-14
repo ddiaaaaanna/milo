@@ -61,7 +61,7 @@ function JournalForm({
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
 
-    const api = `http://localhost:5001/journal`;
+    const api = `${import.meta.env.VITE_API_URL}/journal`;
     fetch(api, {
       method: "POST",
       headers: {
@@ -87,7 +87,7 @@ function JournalForm({
   function updateEntry(e: SyntheticEvent) {
     e.preventDefault();
 
-    const api = `http://localhost:5001/journal/${editEntry?._id}`;
+    const api = `${import.meta.env.VITE_API_URL}/journal/${editEntry?._id}`;
     fetch(api, {
       method: "PUT",
       headers: {
