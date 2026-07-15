@@ -57,21 +57,36 @@ function Home() {
               </button>
             ))}
 
-            <p>Age :{age}</p>
-            <p>Gender: {data[selectedIndex].gender}</p>
-            <p>Weight: {data[selectedIndex].weight}kg</p>
+            <div className="dog-stats">
+              <div className="dog-stat">
+                <span className="label">Age</span>
+                <span className="value">{age}</span>
+              </div>
+              <div className="dog-stat">
+                <span className="label">Gender</span>
+                <span className="value">{data[selectedIndex].gender}</span>
+              </div>
+              <div className="dog-stat">
+                <span className="label">Weight</span>
+                <span className="value">{data[selectedIndex].weight}kg</span>
+              </div>
+              <div className="dog-stat">
+                <span className="label">Birthday</span>
+                <span className="value">
+                  {data[selectedIndex].birthday
+                    ? new Date(data[selectedIndex].birthday).toLocaleDateString(
+                        "en-US",
+                        { year: "numeric", month: "long", day: "numeric" },
+                      )
+                    : "Unknown"}
+                </span>
+              </div>
+            </div>
 
-            <p>
-              Birthday:
-              {data[selectedIndex].birthday
-                ? new Date(data[selectedIndex].birthday).toLocaleDateString(
-                    "en-US",
-                    { year: "numeric", month: "long", day: "numeric" },
-                  )
-                : "Unknown"}
-            </p>
             <Link to={`/dog/${data[selectedIndex]._id}`}>
-              <p>Open full profile →</p>
+              <button type="button" className="profile-btn">
+                Open full profile →
+              </button>
             </Link>
           </div>
 

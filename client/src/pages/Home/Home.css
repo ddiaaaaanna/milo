@@ -50,16 +50,33 @@
   color: #4a5a2f;
 }
 
-@media (max-width: 1000px) {
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-  .dashboard-dog-card {
-    grid-row: auto;
-  }
-  .dashboard-summaries {
-    grid-template-columns: 1fr;
-  }
+.dog-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.dog-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: var(--border-radius-sm);
+  padding: 12px 14px;
+}
+
+.dog-stat .label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-main);
+}
+
+.dog-stat .value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark);
 }
 
 .empty-state {
@@ -104,4 +121,32 @@
 
 .empty-state button:hover {
   background-color: #3a4a25;
+}
+
+.profile-btn {
+  display: block;
+  margin: 0 auto;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.8rem 1.8rem;
+  background-color: #4a5a2f;
+  color: #f5f3ea;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.profile-btn:hover {
+  background-color: #3a4a25;
+}
+
+@media (max-width: 1000px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-dog-card {
+    grid-row: auto;
+  }
+  .dashboard-summaries {
+    grid-template-columns: 1fr;
+  }
 }
