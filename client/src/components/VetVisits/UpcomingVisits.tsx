@@ -26,9 +26,9 @@ function UpcomingVisits({ dogId }: UpcomingVisitProps) {
       </div>
 
       {upcomingVisits.length === 0 && (
-        <>
+        <div className="empty-state-txt">
           <p>No upcoming visits</p>
-        </>
+        </div>
       )}
 
       {data.length > 0 &&

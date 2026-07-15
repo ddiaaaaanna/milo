@@ -25,7 +25,11 @@ function RecentEntries({ dogId }: RecentEntriesProps) {
         <h4>Recent Journal</h4>
       </div>
 
-      {data.length === 0 && <p>No entries yet</p>}
+      {data.length === 0 && (
+        <div className="empty-state-txt">
+          <p>No entries yet</p>
+        </div>
+      )}
 
       {data.length > 0 &&
         showRecents.map((e) => (

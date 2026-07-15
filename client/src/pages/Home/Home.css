@@ -163,6 +163,17 @@
   font-weight: 600;
 }
 
+.empty-state-txt {
+  text-align: center;
+}
+
+.empty-state-txt p {
+  color: var(--text-main);
+  font-size: 15px;
+  font-style: italic;
+  padding: 5px 0;
+}
+
 @media (max-width: 1000px) {
   .dashboard-grid {
     grid-template-columns: 1fr;

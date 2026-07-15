@@ -26,7 +26,11 @@ function UpcomingMedications({ dogId }: UpcomingMedicationProps) {
         <h4>Medications due: </h4>
       </div>
 
-      {medicationsDue.length === 0 && <p>No medications yet</p>}
+      {medicationsDue.length === 0 && (
+        <div className="empty-state-txt">
+          <p>No medications yet</p>
+        </div>
+      )}
 
       {medicationsDue.length > 0 &&
         medicationsDue.map((med) => (

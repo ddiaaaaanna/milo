@@ -24,8 +24,19 @@ function TrainingProgress({ dogId }: TrainingProgressProps) {
         <h4>Training:</h4>
       </div>
 
-      <p>{progress}%</p>
-      <p>{inProgressEx} in progress</p>
+      {progress === 0 && inProgressEx === 0 && (
+        <div className="empty-state-txt">
+          <p>No training yet</p>
+        </div>
+      )}
+
+      {progress > 0 ||
+        (inProgressEx > 0 && (
+          <div>
+            <p>{progress}%</p>
+            <p>{inProgressEx} in progress</p>
+          </div>
+        ))}
     </div>
   );
 }
