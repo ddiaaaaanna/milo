@@ -36,7 +36,7 @@ function UpcomingMedications({ dogId }: UpcomingMedicationProps) {
         medicationsDue.map((med) => (
           <div key={med._id}>
             <p>{med.name}</p>
-            <p>{med.dose}</p>
+            <p>Dose: {med.dose}</p>
             <p>{med.frequency}</p>
             <p>
               {med.startDate

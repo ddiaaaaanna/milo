@@ -31,7 +31,7 @@
   border: none;
 }
 
-.dog-info > .text-part {
+.text-part {
   flex: 1;
 }
 

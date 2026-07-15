@@ -1,0 +1,49 @@
+.training-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.training-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  border-radius: var(--border-radius-sm);
+  padding: 12px 14px;
+}
+
+.training-item .info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.training-item .name {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.training-item .difficulty {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-main);
+}
+
+.training-item .actions {
+  display: flex;
+  gap: 6px;
+}
+
+.training-item .actions button {
+  border: none;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: var(--border-radius-sm);
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}

@@ -62,25 +62,31 @@ function Training({ dogId }: TrainingProps) {
 
       <p>Progress: {progress}%</p>
 
-      {data &&
-        data.map((ex) => (
-          <div key={ex._id}>
-            <p>{ex.exerciseName}</p>
-            <p>{ex.difficulty}</p>
-            <button
-              type="button"
-              onClick={() => {
-                setShowEditForm(true);
-                setEditExercise(ex);
-              }}
-            >
-              edit
-            </button>
-            <button type="button" onClick={() => deleteExercise(ex._id)}>
-              delete
-            </button>
-          </div>
-        ))}
+      <div className="training-list">
+        {data &&
+          data.map((ex) => (
+            <div key={ex._id} className="training-item">
+              <div className="info">
+                <p className="name">{ex.exerciseName}</p>
+                <p className="difficulty">{ex.difficulty}</p>
+              </div>
+              <div className="actions">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowEditForm(true);
+                    setEditExercise(ex);
+                  }}
+                >
+                  edit
+                </button>
+                <button type="button" onClick={() => deleteExercise(ex._id)}>
+                  delete
+                </button>
+              </div>
+            </div>
+          ))}
+      </div>
 
       {showForm && (
         <ExerciseForm

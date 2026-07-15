@@ -38,7 +38,7 @@ function DogProfile() {
     <div className="app-layout">
       <Navigation />
 
-      <div className="page-content">
+      <div className="page-content dog">
         {data && (
           <>
             <Link to="/">← Back to dashboard</Link>
