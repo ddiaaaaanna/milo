@@ -69,27 +69,34 @@ function Journal({ dogId, name, breed }: JournalProps) {
         New journal entry
       </button>
 
-      {data &&
-        data.map((e) => (
-          <div key={e._id}>
-            <p>{new Date(e.date).toLocaleDateString()}</p>
-            <p>{e.title}</p>
-            <p>{e.entry}</p>
-
-            <button
-              type="button"
-              onClick={() => {
-                setShowForm(true);
-                setEditEntry(e);
-              }}
-            >
-              edit
-            </button>
-            <button type="button" onClick={() => deleteJournalEntry(e._id)}>
-              delete
-            </button>
-          </div>
-        ))}
+      <div className="record-list">
+        {data &&
+          data.map((e) => (
+            <div key={e._id} className="record-item">
+              <div className="info">
+                <span className="date">
+                  {new Date(e.date).toLocaleDateString()}
+                </span>
+                <span className="primary">{e.title}</span>
+                <span className="detail">{e.entry}</span>
+              </div>
+              <div className="actions">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowForm(true);
+                    setEditEntry(e);
+                  }}
+                >
+                  edit
+                </button>
+                <button type="button" onClick={() => deleteJournalEntry(e._id)}>
+                  delete
+                </button>
+              </div>
+            </div>
+          ))}
+      </div>
 
       {showForm && (
         <JournalForm

@@ -70,28 +70,33 @@ function VetVisits({ dogId, name, breed }: VetVisitProps) {
         + Add vet visit
       </button>
 
-      {data &&
-        data.map((v) => (
-          <div key={v._id}>
-            <p>{new Date(v.date).toLocaleDateString()}</p>
-            <p>{v.reason}</p>
-            <p>{v.visitType}</p>
-            <p>{v.diagnosis}</p>
-            {v.treatment && <p>{v.treatment}</p>}
-
-            <div>
-              <button
-                onClick={() => {
-                  setEditVisit(v);
-                  setShowForm(true);
-                }}
-              >
-                edit
-              </button>
-              <button onClick={() => deleteVisit(v._id)}>delete</button>
+      <div className="record-list">
+        {data &&
+          data.map((v) => (
+            <div key={v._id} className="record-item">
+              <div className="info">
+                <span className="date">
+                  {new Date(v.date).toLocaleDateString()}
+                </span>
+                <span className="primary">{v.reason}</span>
+                <span className="detail">{v.visitType}</span>
+                <span className="detail">{v.diagnosis}</span>
+                {v.treatment && <span className="detail">{v.treatment}</span>}
+              </div>
+              <div className="actions">
+                <button
+                  onClick={() => {
+                    setEditVisit(v);
+                    setShowForm(true);
+                  }}
+                >
+                  edit
+                </button>
+                <button onClick={() => deleteVisit(v._id)}>delete</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+      </div>
 
       {showForm && (
         <VetVisitForm

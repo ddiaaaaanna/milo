@@ -71,30 +71,36 @@ function MedicationList({ dogId, name, breed }: MedicationProps) {
       >
         + Add medication
       </button>
-
-      {data &&
-        data.map((m) => (
-          <div key={m._id}>
-            <p>Medication name: {m.name}</p>
-            <p>{m.startDate && new Date(m.startDate).toLocaleDateString()}</p>
-            <p>{m.endDate && new Date(m.endDate).toLocaleDateString()}</p>
-            <p>Frequency: {m.frequency}</p>
-            <p>{m.customFrequency && `Frequency: ${m.customFrequency}`}</p>
-            <p>Dose: {m.dose}</p>
-
-            <div>
-              <button
-                onClick={() => {
-                  setEditMedication(m);
-                  setShowForm(true);
-                }}
-              >
-                edit
-              </button>
-              <button onClick={() => deleteMedication(m._id)}>delete</button>
+      <div className="record-list">
+        {data &&
+          data.map((m) => (
+            <div key={m._id} className="record-item">
+              <div className="info">
+                <span className="primary">{m.name}</span>
+                <span className="date">
+                  {m.startDate && new Date(m.startDate).toLocaleDateString()}
+                  {m.endDate &&
+                    ` – ${new Date(m.endDate).toLocaleDateString()}`}
+                </span>
+                <span className="detail">
+                  Frequency: {m.customFrequency || m.frequency}
+                </span>
+                <span className="detail">Dose: {m.dose}</span>
+              </div>
+              <div className="actions">
+                <button
+                  onClick={() => {
+                    setEditMedication(m);
+                    setShowForm(true);
+                  }}
+                >
+                  edit
+                </button>
+                <button onClick={() => deleteMedication(m._id)}>delete</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+      </div>
 
       {showForm && (
         <MedicationForm
