@@ -139,6 +139,30 @@
   background-color: #3a4a25;
 }
 
+.dog-tabs {
+  display: flex;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: var(--border-radius-sm);
+  padding: 4px;
+  gap: 10px;
+}
+
+.dog-tabs button {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 8px 12px;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  color: var(--text-main);
+}
+
+.dog-tabs button.active {
+  background: var(--glass-bg);
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
 @media (max-width: 1000px) {
   .dashboard-grid {
     grid-template-columns: 1fr;

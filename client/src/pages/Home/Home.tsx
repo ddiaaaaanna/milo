@@ -51,11 +51,17 @@ function Home() {
       <div className="page-content">
         <div className="dashboard-grid">
           <div className="dashboard-dog-card">
-            {data.map((d, index) => (
-              <button key={d._id} onClick={() => setSelectedIndex(index)}>
-                <p>{d.name}</p>
-              </button>
-            ))}
+            <div className="dog-tabs">
+              {data.map((d, index) => (
+                <button
+                  key={d._id}
+                  onClick={() => setSelectedIndex(index)}
+                  className={index === selectedIndex ? "active" : ""}
+                >
+                  {d.name}
+                </button>
+              ))}
+            </div>
 
             <div className="dog-stats">
               <div className="dog-stat">
